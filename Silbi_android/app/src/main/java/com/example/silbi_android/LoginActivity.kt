@@ -32,6 +32,7 @@ class LoginActivity : AppCompatActivity() {
         val passwordEditText = findViewById<EditText>(R.id.writepassword)
 
         initLoginButton()
+        initSignUpButton()
 
     }
 
@@ -48,6 +49,25 @@ class LoginActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(this,"로그인 실패!! 이메일&패스워드 확인해주쇼", Toast.LENGTH_SHORT).show()
                     }
+                }
+        }
+    }
+
+    private fun initSignUpButton() {
+        val signUpButton = findViewById<AppCompatButton>(R.id.signupButton)
+        signUpButton.setOnClickListener {
+
+            val email = getInputEmail()
+            val password = getInputPassword()
+
+            auth.createUserWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this) {task ->
+                    if(task.isSuccessful) {
+                        Toast.makeText(this,"회원가입 성공!!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(this,"회원가입 실패ㅠㅠ", Toast.LENGTH_SHORT).show()
+                    }
+
                 }
         }
     }

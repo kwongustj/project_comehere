@@ -11,7 +11,8 @@
         <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/activity_keyword2.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.165" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/activity_mypage.xml" value="0.221875" />
         <entry key="app/src/main/res/layout/activity_recommand.xml" value="0.33541666666666664" />
       </map>
     </option>

@@ -2,6 +2,8 @@ package com.example.silbi_android
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -14,25 +16,28 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
 
-    private val Button: AppCompatButton by lazy {
-        findViewById<AppCompatButton>(R.id.loginbtn)
-    }
+//    private val Button: AppCompatButton by lazy {
+//        findViewById<AppCompatButton>(R.id.loginbtn)
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        Button.setOnClickListener {
-            startActivity(Intent(this, FindActivity::class.java))
-        }
+//        Button.setOnClickListener {
+//            startActivity(Intent(this, FindActivity::class.java))
+//        }
 
         auth = Firebase.auth
 
-        val emailEditText = findViewById<EditText>(R.id.writeemail)
-        val passwordEditText = findViewById<EditText>(R.id.writepassword)
+    //    val emailEditText = findViewById<EditText>(R.id.writeemail)
+      //  val passwordEditText = findViewById<EditText>(R.id.writepassword)
 
         initLoginButton()
         initSignUpButton()
+        //initEmailAndPasswordEditText()
+
+
 
     }
 
@@ -72,7 +77,31 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-
+//    private fun initEmailAndPasswordEditText() {
+//        val emailEditText = findViewById<EditText>(R.id.writeemail)
+//        val passwordEditText = findViewById<EditText>(R.id.writepassword)
+//        val loginButton = findViewById<AppCompatButton>(R.id.loginbtn)
+//         val signUpButton = findViewById<AppCompatButton>(R.id.signupButton)
+//
+//        emailEditText.addTextChangedListener{
+//
+//        }
+//
+//        emailEditText.addTextChangedListener(object : TextWatcher {
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                val enable = emailEditText.text.isNotEmpty() && passwordEditText.text.isNotEmpty()
+//                loginButton.isEnabled = enable
+//                signUpButton.isEnabled = enable
+//            }
+//
+//            override fun afterTextChanged(s: Editable?) {
+//            }
+//        }
+//        )
+//    }
 
     private fun getInputEmail(): String {
         return findViewById<EditText>(R.id.writeemail).text.toString()

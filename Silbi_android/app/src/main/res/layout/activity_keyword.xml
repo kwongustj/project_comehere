@@ -44,7 +44,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanoom"
-                android:text="누구랑 몇명이서 놀러왔나요?"
+                android:text="누구랑 놀러왔나요?"
                 android:textSize="25dp"
                 android:textStyle="bold"
                 app:layout_constraintTop_toTopOf="parent"

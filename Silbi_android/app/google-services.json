@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "380242794685",
+    "firebase_url": "https://silbi-7becf-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "silbi-7becf",
+    "storage_bucket": "silbi-7becf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:380242794685:android:97febd5572358c0196bfd4",
+        "android_client_info": {
+          "package_name": "com.example.silbi_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "380242794685-5suklunfikn5266aedhaa4qqgm1mhvmd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.silbi_android",
+            "certificate_hash": "89fdc18859191e21ec3f2c1df1d90090ff768ac7"
+          }
+        },
+        {
+          "client_id": "380242794685-huqtot2m8upgnfgsqa7qa18tfbn5k089.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxAZRVyaJ-x2AMs6dsKfs3ZuLCWbFc5RA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "380242794685-huqtot2m8upgnfgsqa7qa18tfbn5k089.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

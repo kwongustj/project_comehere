@@ -9,7 +9,7 @@
     android:paddingTop="40dp"
     android:paddingRight="40dp"
     android:paddingBottom="70dp"
-    tools:context=".MainActivity">
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/image"
@@ -23,34 +23,60 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.32" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/gobtn"
+    <EditText
+        android:id="@+id/writeemail"
         android:layout_width="250dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanoom"
+        android:hint="email"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/writepassword"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <EditText
+        android:id="@+id/writepassword"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/nanoom"
+        android:hint="password"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/writeemail" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/loginbtn"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
         android:layout_marginTop="30dp"
         android:backgroundTint="@color/button"
         android:fontFamily="@font/nanoom"
-        android:text="추천 받으러 가기!!"
+        android:text="Login"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/image" />
+        app:layout_constraintTop_toBottomOf="@id/writepassword" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/gomypage"
-        android:layout_width="250dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="12dp"
+        android:id="@+id/signupButton"
+        android:layout_width="200dp"
+        android:layout_height="40dp"
         android:backgroundTint="@color/button"
         android:fontFamily="@font/nanoom"
-        android:text="지금까지 추천받는 내역보러가기"
+        android:text="SIGN UP"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gobtn" />
+        app:layout_constraintTop_toBottomOf="@id/loginbtn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Silbi_android</string>
+    <string name="친구들">#친구들</string>
+    <string name="가족">#가족</string>
+    <string name="여긴어떠세요">여긴 어떠세요?!</string>
+</resources>

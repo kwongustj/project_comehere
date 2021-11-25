@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="70dp"
-    android:paddingTop="40dp"
-    android:paddingLeft="40dp"
-    android:paddingRight="40dp"
     android:background="@color/background"
+    android:paddingLeft="40dp"
+    android:paddingTop="40dp"
+    android:paddingRight="40dp"
+    android:paddingBottom="70dp"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,117 +22,69 @@
         tools:layout_editor_absoluteY="-17dp">
 
         <ImageView
+            android:id="@+id/image"
             android:layout_width="200dp"
             android:layout_height="50dp"
             android:src="@drawable/come"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/FirstFragment"
-            android:layout_width="match_parent"
+
+        <EditText
+            android:id="@+id/textbuilding"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_inside"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="20dp"
-            app:layout_constraintBottom_toTopOf="@id/SecondFragment"
-            app:layout_constraintTop_toTopOf="parent">
+            android:fontFamily="@font/nanoom"
+            android:hint="ex) 현대백화점 충청점"
+            android:textColorHint="#988E8E"
+            android:textSize="20dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image" />
 
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nanoom"
-                android:paddingBottom="5dp"
-                android:text="지역검색"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/textlocation"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/textlocation"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nanoom"
-                android:hint="ex) 충청북도 청주"
-                android:textSize="20dp"
-                android:textColorHint="#988E8E"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/location"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/button"
-                android:fontFamily="@font/nanoom"
-                android:text="검색"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/textlocation" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/SecondFragment"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn1"
+            android:layout_width="65dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/rounded_inside"
-            android:paddingLeft="20dp"
-            android:paddingTop="20dp"
-            android:paddingRight="20dp"
-            android:paddingBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:backgroundTint="@color/button"
+            android:fontFamily="@font/nanoom"
+            android:text="검색"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/textbuilding"
+            app:layout_constraintTop_toTopOf="@id/textbuilding" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/FirstFragment">
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn1"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
-            <TextView
-                android:id="@+id/building"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nanoom"
-                android:paddingBottom="5dp"
-                android:text="건물검색"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/textbuilding"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <EditText
-                android:id="@+id/textbuilding"
-                android:layout_width="250dp"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nanoom"
-                android:hint="ex) 현대백화점 충청점"
-                android:textSize="20dp"
-                android:textColorHint="#988E8E"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/building"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:backgroundTint="@color/button"
-                android:fontFamily="@font/nanoom"
-                android:text="검색"
-                android:textSize="25dp"
-                android:textStyle="bold"
-                app:layout_constraintTop_toBottomOf="@id/textbuilding" />
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <TextView
+            android:id="@+id/emptyResultTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:fontFamily="@font/nanoom"
+            android:text="검색 결과가 없습니다."
+            android:textSize="25dp"
+            tools:visibility="visible"
+            android:visibility="gone"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

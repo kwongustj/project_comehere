@@ -44,7 +44,7 @@
         android:layout_marginTop="12dp"
         android:backgroundTint="@color/button"
         android:fontFamily="@font/nanoom"
-        android:text="지금까지 추천받는 내역보러가기"
+        android:text="지금까지 추천받은 내역보러가기"
         android:textSize="20dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"

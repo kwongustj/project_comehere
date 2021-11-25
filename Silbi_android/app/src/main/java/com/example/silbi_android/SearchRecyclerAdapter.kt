@@ -7,21 +7,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.silbi_android.databinding.ViewholderSearchResultItemBinding
+import com.example.silbi_android.model.SearchResultEntity
 
-class SearchRecyclerAdapter(
-    private var  searchResultClickListener: (Any) -> Unit
-):RecyclerView.Adapter<SearchRecyclerAdapter.SearchResultItemViewHolder>(){
+class SearchRecyclerAdapter:RecyclerView.Adapter<SearchRecyclerAdapter.SearchResultItemViewHolder>(){
 
-    private var searchResultList:List<Any> = listOf()
+    private var searchResultList:List<SearchResultEntity> = listOf()
+    private lateinit var  searchResultClickListener: (SearchResultEntity) -> Unit
 
-    class SearchResultItemViewHolder(val binding: ViewholderSearchResultItemBinding, val searchResultClickListener: (Any) -> Unit): RecyclerView.ViewHolder(binding.root) {
+    class SearchResultItemViewHolder(val binding: ViewholderSearchResultItemBinding, val searchResultClickListener: (SearchResultEntity) -> Unit): RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data: Any) = with(binding) {
-            textTextView.text = "제목"
-            subtextTextView.text = "부제목"
+        fun bindData(data: SearchResultEntity) = with(binding) {
+            textTextView.text = data.name
+            subtextTextView.text = data.fullAddress
         }
 
-        fun bindViews(data: Any) {
+        fun bindViews(data: SearchResultEntity) {
             binding.root.setOnClickListener {
                 searchResultClickListener(data)
             }
@@ -34,10 +34,16 @@ class SearchRecyclerAdapter(
     }
 
     override fun onBindViewHolder(holder: SearchResultItemViewHolder, position: Int) {
-        holder.bindData(Any())
-        holder.bindViews(Any())
+        holder.bindData(searchResultList[position])
+        holder.bindViews(searchResultList[position])
     }
 
-    override fun getItemCount(): Int = 10
+    override fun getItemCount(): Int = searchResultList.size
+
+    fun setSearchResultList(searchResultList: List<SearchResultEntity>, searchResultClickListener: (SearchResultEntity) -> Unit) {
+        this.searchResultList = searchResultList
+        this.searchResultClickListener = searchResultClickListener
+
+    }
 
 }

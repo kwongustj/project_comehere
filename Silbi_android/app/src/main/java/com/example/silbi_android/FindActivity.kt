@@ -73,7 +73,6 @@ class FindActivity: AppCompatActivity(),CoroutineScope{
             )
         }
         adapter.setSearchResultList(dataList) {
-        Toast.makeText(this, "빌딩이름:${it.name} 주소: ${it.fullAddress}",Toast.LENGTH_SHORT).show()
             startActivity(
                 Intent(this, KeywordActivity::class.java).apply {
                     putExtra("building",it.name)

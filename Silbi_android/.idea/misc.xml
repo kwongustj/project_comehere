@@ -6,18 +6,20 @@
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.14114583333333333" />
         <entry key="app/src/main/res/drawable-v24/input.xml" value="0.21851851851851853" />
         <entry key="app/src/main/res/drawable-v24/rounded.xml" value="0.20208333333333334" />
+        <entry key="app/src/main/res/drawable/bottom_sheet_background.xml" value="0.24537037037037038" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.14114583333333333" />
         <entry key="app/src/main/res/drawable/keyword.xml" value="0.3515625" />
         <entry key="app/src/main/res/drawable/rounded_inside.xml" value="0.21388888888888888" />
         <entry key="app/src/main/res/layout/activity_find.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.33541666666666664" />
+        <entry key="app/src/main/res/layout/activity_keyword.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_keyword2.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.165" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.5" />
         <entry key="app/src/main/res/layout/activity_mypage.xml" value="0.221875" />
         <entry key="app/src/main/res/layout/activity_recommand.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.13728470111448834" />
-        <entry key="app/src/main/res/layout/bottom_sheet_layout.xml" value="0.15070921985815602" />
+        <entry key="app/src/main/res/layout/bottom_sheet_layout.xml" value="0.18306295494913738" />
+        <entry key="app/src/main/res/layout/viewholder_search_result_item.xml" value="0.10009057971014493" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14114583333333333" />
       </map>
     </option>

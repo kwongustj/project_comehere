@@ -17,7 +17,6 @@ class KeywordActivity: AppCompatActivity(){
         findViewById<AppCompatButton>(R.id.btn2)
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keyword)
@@ -25,6 +24,7 @@ class KeywordActivity: AppCompatActivity(){
         val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
         val bottomSheetDialog = BottomSheetDialog(this)
         bottomSheetDialog.setContentView(bottomSheetView)
+        bottomSheetDialog.dismissWithAnimation
 
         buildingName.setText(intent.getStringExtra("building"))
 

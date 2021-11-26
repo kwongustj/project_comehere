@@ -8,7 +8,7 @@
     android:paddingTop="40dp"
     android:paddingLeft="40dp"
     android:paddingRight="40dp"
-    android:background="@color/background"
+    android:background="@color/white"
     tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout

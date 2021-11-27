@@ -12,9 +12,9 @@ class RateAdapter(val context: Context, val shopList: ArrayList<rate>) : BaseAda
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         val view: View = LayoutInflater.from(context).inflate(R.layout.list_item_rate,null)//view붙이기 위함
 
-        val name = view.findViewById<TextView>(R.id.name)
-        val call = view.findViewById<TextView>(R.id.call)
-        val floor = view.findViewById<TextView>(R.id.floor)
+        val name = view.findViewById<TextView>(R.id.nametext)
+        val call = view.findViewById<TextView>(R.id.calltext)
+        val floor = view.findViewById<TextView>(R.id.floortext)
 
         val rate = shopList[position]
         name.text = rate.name

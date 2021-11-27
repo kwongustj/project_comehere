@@ -19,7 +19,8 @@
         <entry key="app/src/main/res/layout/activity_recommand.xml" value="0.33541666666666664" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.13728470111448834" />
         <entry key="app/src/main/res/layout/bottom_sheet_layout.xml" value="0.18306295494913738" />
-        <entry key="app/src/main/res/layout/viewholder_search_result_item.xml" value="0.10009057971014493" />
+        <entry key="app/src/main/res/layout/list_item_rate.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/viewholder_search_result_item.xml" value="0.45" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.14114583333333333" />
       </map>
     </option>

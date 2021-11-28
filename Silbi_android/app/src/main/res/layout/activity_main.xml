@@ -64,33 +64,40 @@
 
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation"
-        android:layout_width="match_parent"
+        android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start">
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/image2"
+                android:layout_width="200dp"
+                android:paddingLeft="20dp"
+                android:layout_height="76dp"
+                android:paddingBottom="10dp"
+                android:src="@drawable/come" />
+
             <Button
                 android:id="@+id/menu01"
                 android:layout_width="match_parent"
+                android:background="@color/rounded_inside"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="@color/rounded_inside"
                 android:layout_height="50dp"
-                android:text="MENU 01"/>
+                android:text="마이페이지"/>
             <Button
                 android:id="@+id/menu02"
                 android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
                 android:layout_height="50dp"
-                android:text="MENU 02"/>
-            <Button
-                android:id="@+id/menu03"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="MENU 03"/>
-            <Button
-                android:id="@+id/menu04"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="MENU 04"/>
+                android:background="@color/rounded_inside"
+                android:backgroundTint="@color/rounded_inside"
+                android:text="카카오톡 문의하기"/>
+
+
         </LinearLayout>
     </com.google.android.material.navigation.NavigationView>
 </androidx.drawerlayout.widget.DrawerLayout>

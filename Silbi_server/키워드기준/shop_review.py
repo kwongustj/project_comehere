@@ -1,5 +1,11 @@
+from collections import Counter
+
 import pandas as pd
 import numpy as np
+from konlpy.tag import Okt
+
+okt = Okt()
+
 
 df = pd.read_excel('blog_review.xlsx')
 df_list_ = []
@@ -18,9 +24,6 @@ for id in df_list_:
     if count == 1167: break
     count = count + 1
 
-for id in df_list_:
-    print(id)
-
 a = []
 for id in df_list_:
     a.append(id[0])
@@ -34,14 +37,24 @@ for s in a:
             str = str + " " + id[1]
     map_list = [s,str]
     list.append(map_list)
-
-print(list)
-
-df = pd.DataFrame.from_records(list)
-df.to_excel('text.xlsx')
-
-
-
+list2 = []
+for id in list:
+    sentences_tag = []
+    noun_adj_list = []
+    morph = okt.pos(id[1])
+    sentences_tag.append(morph)
+    print("--------------------------------------" + id[0] + "--------------------------------------")
+    for sentences in sentences_tag:
+        for word, tag in sentences:
+            if len(word) < 2:
+                continue
+            if tag in ['Noun','Adjective']:
+                noun_adj_list.append(word)
+    counts = Counter(noun_adj_list)
+    list2.append([id[0],counts.most_common(40)])
+    print(counts.most_common(40))
+    df = pd.DataFrame.from_records(list2)
+    df.to_excel('text.xlsx')
 
 
 

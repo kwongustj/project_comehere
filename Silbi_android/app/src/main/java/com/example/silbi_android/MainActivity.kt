@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -18,6 +20,12 @@ class MainActivity : AppCompatActivity() {
         findViewById<AppCompatButton>(R.id.gomypage)
     }
 
+    private val drawerLayout: DrawerLayout by lazy {
+        findViewById<DrawerLayout>(R.id.drawer)
+    }
+
+
+
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,15 +36,9 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, FindActivity::class.java))
         }
         Button2.setOnClickListener {
-            startActivity(Intent(this, MypageActivity::class.java))
+            drawerLayout.openDrawer(GravityCompat.START)
         }
 
     }
-    override fun onStart() {
-        super.onStart()
 
-        if(auth.currentUser == null){
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
-    }
 }

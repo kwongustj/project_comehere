@@ -24,6 +24,11 @@ for id in df_list_:
     if count == 1167: break
     count = count + 1
 
+
+
+
+
+
 a = []
 for id in df_list_:
     a.append(id[0])
@@ -37,8 +42,10 @@ for s in a:
             str = str + " " + id[1]
     map_list = [s,str]
     list.append(map_list)
+
 list2 = []
 for id in list:
+    list_keyword_1shop = []
     sentences_tag = []
     noun_adj_list = []
     morph = okt.pos(id[1])
@@ -51,15 +58,11 @@ for id in list:
             if tag in ['Noun','Adjective']:
                 noun_adj_list.append(word)
     counts = Counter(noun_adj_list)
-    list2.append([id[0],counts.most_common(40)])
-    print(counts.most_common(40))
+    list_keyword_1shop.append(id[0])
+    a = counts.most_common(40)
+    for name,count in a:
+        list_keyword_1shop.append(name)
+    print(list_keyword_1shop)
+    list2.append(list_keyword_1shop)
     df = pd.DataFrame.from_records(list2)
     df.to_excel('text.xlsx')
-
-
-
-# list1 = [[1, 10], 2, [3, 19]]
-# list2 = [[4, 2], [5, 9], [6, 3]]
-#
-# list3 = list(map(list.__add__, list1, list2))
-# print(list3)

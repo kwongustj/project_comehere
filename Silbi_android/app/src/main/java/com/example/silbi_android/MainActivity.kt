@@ -24,6 +24,16 @@ class MainActivity : AppCompatActivity() {
         findViewById<DrawerLayout>(R.id.drawer)
     }
 
+    private val menu01: AppCompatButton by lazy {
+        findViewById<AppCompatButton>(R.id.menu01)
+    }
+
+    private val menu02: AppCompatButton by lazy {
+        findViewById<AppCompatButton>(R.id.menu02)
+    }
+
+
+
 
 
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
@@ -37,6 +47,13 @@ class MainActivity : AppCompatActivity() {
         }
         Button2.setOnClickListener {
             drawerLayout.openDrawer(GravityCompat.START)
+        }
+        menu01.setOnClickListener {
+            startActivity(Intent(this, MypageActivity::class.java))
+        }
+
+        menu02.setOnClickListener {
+            startActivity(Intent(this, AskActivity::class.java))
         }
 
     }

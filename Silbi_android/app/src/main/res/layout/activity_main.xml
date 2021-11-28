@@ -95,7 +95,7 @@
                 android:layout_height="50dp"
                 android:background="@color/rounded_inside"
                 android:backgroundTint="@color/rounded_inside"
-                android:text="카카오톡 문의하기"/>
+                android:text="문의하기"/>
 
 
         </LinearLayout>

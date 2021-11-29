@@ -63,6 +63,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:fontFamily="@font/nanoom"
             android:layout_marginTop="30dp"
             android:text="같이 온 사람"
+            android:paddingBottom="20dp"
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -81,7 +82,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/chip1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="가족"
+                android:text="#가족이랑 왔어요"
                 android:theme="@style/Theme.MaterialComponents.Light"
                 />
 
@@ -90,7 +91,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/chip2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="연인"
+                android:text="#연인이랑 놀러왔어요"
                 android:theme="@style/Theme.MaterialComponents.Light"
                 />
 
@@ -99,7 +100,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/chip3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="친구"
+                android:text="친구랑 놀러 왔어요"
                 android:theme="@style/Theme.MaterialComponents.Light"
                 />
 
@@ -108,7 +109,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/chip3ㅇ4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="아이"
+                android:text="아이와 함께 왔어요"
                 android:theme="@style/Theme.MaterialComponents.Light"
                 />
 
@@ -122,6 +123,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
             android:fontFamily="@font/nanoom"
             android:layout_marginTop="30dp"
             android:text="목적"
+            android:paddingBottom="20dp"
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -140,7 +142,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/chip5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="가족"
+                android:text="#배고파요"
                 android:theme="@style/Theme.MaterialComponents.Light"
                 />
 
@@ -149,7 +151,9 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/chip6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="연인"
+                android:text="#옷사고싶어요"
+                android:clickable="true"
+                app:chipBackgroundColor="@color/bg_chip_state_list"
                 android:theme="@style/Theme.MaterialComponents.Light"
                 />
 
@@ -158,7 +162,7 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/chip7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="친구"
+                android:text="#가구보러왔어요"
                 android:theme="@style/Theme.MaterialComponents.Light"
                 />
 
@@ -167,13 +171,26 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/chip8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="아이"
+                android:text="#카페에서쉬고싶어요"
                 android:theme="@style/Theme.MaterialComponents.Light"
                 />
 
         </com.google.android.material.chip.ChipGroup>
 
-
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/button"
+            android:fontFamily="@font/nanoom"
+            android:text="다음"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/chipgroup2"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -53,7 +53,7 @@ class KeywordActivity: AppCompatActivity() {
         bottomSheetDialog.dismissWithAnimation
 
         buildingName.setText(intent.getStringExtra("building"))
-        
+
 
         setRetrofit()
         callTodoList()

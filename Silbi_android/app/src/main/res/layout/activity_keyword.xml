@@ -8,12 +8,21 @@
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
+        android:id="@+id/constraintLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/rounded"
         tools:layout_editor_absoluteX="-17dp"
         tools:layout_editor_absoluteY="-17dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/rounded_inside"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
         <TextView
             android:id="@+id/explain1"
@@ -36,7 +45,7 @@
             android:text="-"
             android:paddingLeft="40dp"
             android:textSize="25dp"
-            android:textColor="@color/button"
+            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/explain2"
             app:layout_constraintStart_toStartOf="@id/explain1"
@@ -52,15 +61,13 @@
             android:textSize="20dp"
             android:paddingLeft="40dp"
             android:textStyle="bold"
+            android:paddingBottom="10dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/buildingName" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:background="@color/browser_actions_divider_color"
-            android:layout_marginTop="10dp"
-            app:layout_constraintTop_toBottomOf="@id/explain2"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         <TextView
             android:id="@+id/people"
@@ -71,12 +78,12 @@
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
             android:paddingLeft="40dp"
-            android:text="같이 온 사람"
+            android:text="1. 같이 온 사람"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/explain2"
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout2"
             app:layout_constraintBottom_toTopOf="@id/chipgroup" />
 
         <com.google.android.material.chip.ChipGroup
@@ -137,7 +144,7 @@
             android:fontFamily="@font/nanoom"
             android:paddingTop="10dp"
             android:paddingBottom="20dp"
-            android:text="목적"
+            android:text="2. 목적"
             android:paddingLeft="40dp"
             android:textColor="@color/black"
             android:textSize="30sp"
@@ -209,6 +216,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/chipgroup2" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

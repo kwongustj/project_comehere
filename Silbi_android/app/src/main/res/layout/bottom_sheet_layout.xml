@@ -4,42 +4,56 @@
     android:id="@+id/bottomSheetDashBoardLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:behavior_peekHeight = "100dp"
+    app:behavior_peekHeight="100dp"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <TextView
         android:id="@+id/bottomsheetTitle"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:text="네이버 평점 순으로 보기!!"
-        android:textStyle="bold"
+        android:fontFamily="@font/nanoom"
         android:gravity="center"
-        android:textSize="15sp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="네이버 평점 순으로 보기!!"
+        android:textSize="20sp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        app:layout_constraintTop_toBottomOf="@+id/bottomsheetTitle"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:background="@drawable/bottom_sheet_background"
-        app:layout_constraintBottom_toBottomOf="parent"
         android:layout_width="0dp"
-        android:paddingTop="20dp"
+        android:layout_height="0dp"
+        android:background="@drawable/bottom_sheet_background"
         android:scrollbars="vertical"
-        android:layout_height="0dp" >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bottomsheetTitle">
+
+        <TextView
+            android:id="@+id/explain"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:fontFamily="@font/nanoom"
+            android:gravity="center"
+            android:text="가장 리뷰가 많고 리뷰가 좋은 곳들이에요!!"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/listView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ListView
             android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="550dp"
             android:layout_marginStart="1dp"
             android:layout_marginBottom="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/explain" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

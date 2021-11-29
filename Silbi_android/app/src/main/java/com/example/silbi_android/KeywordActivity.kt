@@ -10,10 +10,7 @@ import com.example.myapplication.rate
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_keyword.*
-import android.view.View
-import android.widget.Button
-import android.widget.ProgressBar
-import android.widget.TextView
+import com.google.android.material.chip.Chip
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -28,21 +25,22 @@ class KeywordActivity: AppCompatActivity() {
     var array = Array<String>(10,{""})
 
     var RateList = arrayListOf<rate>()
-    private val Button: AppCompatButton by lazy {
-        findViewById<AppCompatButton>(R.id.btn1)
-    }
 
-    private val Button1: AppCompatButton by lazy {
-        findViewById<AppCompatButton>(R.id.btn2)
+
+    private val chip: Chip by lazy {
+        findViewById<Chip>(R.id.chip)
     }
 
     lateinit var mRetrofit :Retrofit
     lateinit var mRetrofitAPI: RetrofitAPI
     lateinit var mCallTodoList : Call<JsonObject>
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keyword)
+
+
         val database: FirebaseDatabase =
             FirebaseDatabase.getInstance("https://silbi-7becf-default-rtdb.asia-southeast1.firebasedatabase.app/")
         val myRef: DatabaseReference = database.getReference("점포")
@@ -56,9 +54,6 @@ class KeywordActivity: AppCompatActivity() {
 
         buildingName.setText(intent.getStringExtra("building"))
 
-        Button.setOnClickListener {
-            startActivity(Intent(this, Keyword2Activity::class.java))
-        }
 
         setRetrofit()
         callTodoList()

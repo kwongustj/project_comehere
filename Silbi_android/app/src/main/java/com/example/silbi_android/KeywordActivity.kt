@@ -30,29 +30,32 @@ class KeywordActivity : AppCompatActivity() {
         findViewById<ChipGroup>(R.id.chipgroup)
     }
 
+    private val chipgroup2: ChipGroup by lazy {
+        findViewById<ChipGroup>(R.id.chipgroup2)
+    }
+
     val TAG = "TAG_MainActivity"
     var array = Array<String>(10, { "" })
 
     var RateList = arrayListOf<rate>()
-    var selectedKeywordList =arrayListOf<String>()
-
-    private val chip: Chip by lazy {
-        findViewById<Chip>(R.id.chip)
-    }
+    var selectedKeywordList =arrayListOf<String>("1","2","3")
 
     private val btn1: AppCompatButton by lazy {
         findViewById<AppCompatButton>(R.id.btn1)
     }
 
     lateinit var mRetrofit: Retrofit
-    lateinit var mRetrofitAPI: RetrofitAPI
+    lateinit var mRetrofitAPI: RetrofitAPI2
     lateinit var mCallTodoList: Call<JsonObject>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keyword)
 
-        var list: List<String> = listOf("#가족이랑 왔어요", "#연인이랑 왔어요", "#친구랑 왔어요", "#아이랑 왔어요")
+        var list: List<String> = listOf("#가족과 왔어요", "#연인과 왔어요", "#친구와 왔어요", "#아이와 왔어요")
+        var list2: List<String> = listOf("#배고파요","#옷사고싶어요","#가구&가전제품 보러왔어요","#카페에서놀래요","#편의시설이 궁금해요")
+
+
         val database: FirebaseDatabase =
             FirebaseDatabase.getInstance("https://silbi-7becf-default-rtdb.asia-southeast1.firebasedatabase.app/")
         val myRef: DatabaseReference = database.getReference("점포")
@@ -67,7 +70,9 @@ class KeywordActivity : AppCompatActivity() {
         buildingName.setText(intent.getStringExtra("building"))
 
         btn1.setOnClickListener {
-            Toast.makeText(this@KeywordActivity,selectedKeywordList[0] ,Toast.LENGTH_SHORT).show()
+            for(i in selectedKeywordList) {
+                Toast.makeText(this@KeywordActivity,i,Toast.LENGTH_SHORT).show()
+            }
             //startActivity(Intent(this, Keyword2Activity::class.java))
         }
 
@@ -78,6 +83,10 @@ class KeywordActivity : AppCompatActivity() {
 
         for( i in list) {
             onAddChip(this,i)
+        }
+
+        for( i in list2){
+            onAddChip2(this,i)
         }
         myRef.addValueEventListener(object : ValueEventListener {
 
@@ -115,19 +124,54 @@ class KeywordActivity : AppCompatActivity() {
         chip.setChipBackgroundColorResource(R.color.bg_chip_state_list)
         val drawble = ChipDrawable.createFromAttributes(this,null,0, R.style.Widget_MaterialComponents_Chip_Choice)
         chip.setChipDrawable(drawble)
+        chip.isCheckable = true
+        var check = chip.isChecked
         chip.setOnClickListener{
-            Toast.makeText(this@KeywordActivity,"추가됨" ,Toast.LENGTH_SHORT).show()
-            var str_data = i.replace("#","")
-            str_data = str_data.replace("이랑 왔어요","")
-            str_data = str_data.replace("랑 왔어요","")
-
-            selectedKeywordList.add(str_data)
+            if(check == true){
+                Toast.makeText(this@KeywordActivity, "빼", Toast.LENGTH_SHORT).show()
+                var str_data = i.replace("#","")
+                str_data = str_data.replace("과 왔어요","")
+                str_data = str_data.replace("와 왔어요","")
+                check = false
+                selectedKeywordList.remove(str_data)
+            } else {
+                Toast.makeText(this@KeywordActivity, "추가됨", Toast.LENGTH_SHORT).show()
+                var str_data = i.replace("#", "")
+                str_data = str_data.replace("과 왔어요","")
+                str_data = str_data.replace("와 왔어요","")
+                check = true
+                selectedKeywordList.add(str_data)
+            }
         }
         chipgroup.addView(chip)
     }
 
+    fun onAddChip2(view: KeywordActivity, i:String) {
+        val chip = Chip(this)
+        chip.text = i
+        chip.setChipBackgroundColorResource(R.color.bg_chip_state_list)
+        val drawble = ChipDrawable.createFromAttributes(this,null,0, R.style.Widget_MaterialComponents_Chip_Choice)
+        chip.setChipDrawable(drawble)
+        chip.isCheckable = true
+        var check = chip.isChecked
+        chip.setOnClickListener{
+            if(check == true){
+                Toast.makeText(this@KeywordActivity, "빼", Toast.LENGTH_SHORT).show()
+                var str_data = i.replace("#", "")
+                selectedKeywordList.remove(str_data)
+                check = false
+            } else {
+                Toast.makeText(this@KeywordActivity, "추가됨", Toast.LENGTH_SHORT).show()
+                var str_data = i.replace("#", "")
+                selectedKeywordList.add(str_data)
+                check = true
+            }
+        }
+        chipgroup2.addView(chip)
+    }
+
     private fun callTodoList() {
-        mCallTodoList = mRetrofitAPI.getTodoList()
+        mCallTodoList = mRetrofitAPI.getTodoList(selectedKeywordList[0],selectedKeywordList[1],selectedKeywordList[2])
         mCallTodoList.enqueue(mRetrofitCallback)//응답을 큐 대기열에 넣는다.
     }
 
@@ -164,6 +208,7 @@ class KeywordActivity : AppCompatActivity() {
             val dataParsed9 = mGson.fromJson(result, DataModel.TodoInfo9::class.java)
             array.set(9, dataParsed9.todo9.task)
 
+            
         }
     })
 
@@ -176,7 +221,7 @@ class KeywordActivity : AppCompatActivity() {
             .build()
 
         //인터페이스로 만든 레트로핏 api요청 받는 것 변수로 등록
-        mRetrofitAPI = mRetrofit.create(RetrofitAPI::class.java)
+        mRetrofitAPI = mRetrofit.create(RetrofitAPI2::class.java)
     }
 
 

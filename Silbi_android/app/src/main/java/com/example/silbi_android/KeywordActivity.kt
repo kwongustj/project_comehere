@@ -1,13 +1,16 @@
 package com.example.silbi_android
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.content.res.Resources
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.content.ContextCompat
 import androidx.core.view.marginRight
 import com.example.myapplication.rate
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -38,14 +41,14 @@ class KeywordActivity : AppCompatActivity() {
     var array = Array<String>(10, { "" })
 
     var RateList = arrayListOf<rate>()
-    var selectedKeywordList =arrayListOf<String>("1","2","3")
+    var selectedKeywordList =arrayListOf<String>(" "," "," "," ")
 
     private val btn1: AppCompatButton by lazy {
         findViewById<AppCompatButton>(R.id.btn1)
     }
 
-    lateinit var mRetrofit: Retrofit
-    lateinit var mRetrofitAPI: RetrofitAPI2
+    lateinit var mRetrofit2: Retrofit
+    lateinit var mRetrofitAPI2: RetrofitAPI2
     lateinit var mCallTodoList: Call<JsonObject>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,17 +72,21 @@ class KeywordActivity : AppCompatActivity() {
 
         buildingName.setText(intent.getStringExtra("building"))
 
-        btn1.setOnClickListener {
-            for(i in selectedKeywordList) {
-                Toast.makeText(this@KeywordActivity,i,Toast.LENGTH_SHORT).show()
-            }
-            //startActivity(Intent(this, Keyword2Activity::class.java))
-        }
-
-
         setRetrofit()
         callTodoList()
         Log.d("array", array[0])
+
+        btn1.setOnClickListener {
+
+            for(i in selectedKeywordList) {
+                Toast.makeText(this@KeywordActivity,i,Toast.LENGTH_SHORT).show()
+            }
+            setRetrofit()
+            callTodoList()
+            Log.d("array", array[0])
+            startActivity(Intent(this, Keyword2Activity::class.java))
+        }
+
 
         for( i in list) {
             onAddChip(this,i)
@@ -124,6 +131,11 @@ class KeywordActivity : AppCompatActivity() {
         chip.setChipBackgroundColorResource(R.color.bg_chip_state_list)
         val drawble = ChipDrawable.createFromAttributes(this,null,0, R.style.Widget_MaterialComponents_Chip_Choice)
         chip.setChipDrawable(drawble)
+        chip.chipBackgroundColor = ColorStateList(
+            arrayOf(
+                intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)),
+            intArrayOf(Color.rgb(220,220,220),Color.rgb(255, 215, 157))
+        )
         chip.isCheckable = true
         var check = chip.isChecked
         chip.setOnClickListener{
@@ -134,13 +146,20 @@ class KeywordActivity : AppCompatActivity() {
                 str_data = str_data.replace("와 왔어요","")
                 check = false
                 selectedKeywordList.remove(str_data)
+                selectedKeywordList.add(" ")
+
             } else {
                 Toast.makeText(this@KeywordActivity, "추가됨", Toast.LENGTH_SHORT).show()
                 var str_data = i.replace("#", "")
                 str_data = str_data.replace("과 왔어요","")
                 str_data = str_data.replace("와 왔어요","")
                 check = true
-                selectedKeywordList.add(str_data)
+                if(selectedKeywordList.contains(" ") == true) {
+                    selectedKeywordList.remove(" ")
+                    selectedKeywordList.add(str_data)
+                }else{
+                    selectedKeywordList.add(str_data)
+                }
             }
         }
         chipgroup.addView(chip)
@@ -152,6 +171,11 @@ class KeywordActivity : AppCompatActivity() {
         chip.setChipBackgroundColorResource(R.color.bg_chip_state_list)
         val drawble = ChipDrawable.createFromAttributes(this,null,0, R.style.Widget_MaterialComponents_Chip_Choice)
         chip.setChipDrawable(drawble)
+        chip.chipBackgroundColor = ColorStateList(
+            arrayOf(
+                intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)),
+            intArrayOf(Color.rgb(220,220,220),Color.rgb(255, 215, 157))
+        )
         chip.isCheckable = true
         var check = chip.isChecked
         chip.setOnClickListener{
@@ -159,11 +183,17 @@ class KeywordActivity : AppCompatActivity() {
                 Toast.makeText(this@KeywordActivity, "빼", Toast.LENGTH_SHORT).show()
                 var str_data = i.replace("#", "")
                 selectedKeywordList.remove(str_data)
+                selectedKeywordList.add(" ")
                 check = false
             } else {
                 Toast.makeText(this@KeywordActivity, "추가됨", Toast.LENGTH_SHORT).show()
                 var str_data = i.replace("#", "")
-                selectedKeywordList.add(str_data)
+                if(selectedKeywordList.contains(" ")) {
+                    selectedKeywordList.remove(" ")
+                    selectedKeywordList.add(str_data)
+                }else{
+                    selectedKeywordList.add(str_data)
+                }
                 check = true
             }
         }
@@ -171,7 +201,7 @@ class KeywordActivity : AppCompatActivity() {
     }
 
     private fun callTodoList() {
-        mCallTodoList = mRetrofitAPI.getTodoList(selectedKeywordList[0],selectedKeywordList[1],selectedKeywordList[2])
+        mCallTodoList = mRetrofitAPI2.getTodoList(selectedKeywordList[0],selectedKeywordList[1],selectedKeywordList[2],selectedKeywordList[3])
         mCallTodoList.enqueue(mRetrofitCallback)//응답을 큐 대기열에 넣는다.
     }
 
@@ -214,14 +244,14 @@ class KeywordActivity : AppCompatActivity() {
 
     private fun setRetrofit() {
         //레트로핏으로 가져올 url설정하고 세팅
-        mRetrofit = Retrofit
+        mRetrofit2 = Retrofit
             .Builder()
             .baseUrl(getString(R.string.baseUrl))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         //인터페이스로 만든 레트로핏 api요청 받는 것 변수로 등록
-        mRetrofitAPI = mRetrofit.create(RetrofitAPI2::class.java)
+        mRetrofitAPI2 = mRetrofit2.create(RetrofitAPI2::class.java)
     }
 
 

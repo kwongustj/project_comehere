@@ -1,17 +1,21 @@
 package com.example.silbi_android
 
-import android.content.ContentValues.TAG
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.core.view.marginRight
 import com.example.myapplication.rate
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_keyword.*
 import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipDrawable
+import com.google.android.material.chip.ChipGroup
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import retrofit2.Call
@@ -22,11 +26,15 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class KeywordActivity : AppCompatActivity() {
 
+    private val chipgroup: ChipGroup by lazy {
+        findViewById<ChipGroup>(R.id.chipgroup)
+    }
+
     val TAG = "TAG_MainActivity"
     var array = Array<String>(10, { "" })
 
     var RateList = arrayListOf<rate>()
-
+    var selectedKeywordList =arrayListOf<String>()
 
     private val chip: Chip by lazy {
         findViewById<Chip>(R.id.chip)
@@ -40,12 +48,11 @@ class KeywordActivity : AppCompatActivity() {
     lateinit var mRetrofitAPI: RetrofitAPI
     lateinit var mCallTodoList: Call<JsonObject>
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keyword)
 
-
+        var list: List<String> = listOf("#가족이랑 왔어요", "#연인이랑 왔어요", "#친구랑 왔어요", "#아이랑 왔어요")
         val database: FirebaseDatabase =
             FirebaseDatabase.getInstance("https://silbi-7becf-default-rtdb.asia-southeast1.firebasedatabase.app/")
         val myRef: DatabaseReference = database.getReference("점포")
@@ -60,13 +67,18 @@ class KeywordActivity : AppCompatActivity() {
         buildingName.setText(intent.getStringExtra("building"))
 
         btn1.setOnClickListener {
-            startActivity(Intent(this, Keyword2Activity::class.java))
+            Toast.makeText(this@KeywordActivity,selectedKeywordList[0] ,Toast.LENGTH_SHORT).show()
+            //startActivity(Intent(this, Keyword2Activity::class.java))
         }
 
 
         setRetrofit()
         callTodoList()
         Log.d("array", array[0])
+
+        for( i in list) {
+            onAddChip(this,i)
+        }
         myRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(snapshot: DataSnapshot) { // 리스트 만들 배열 가져오기
@@ -95,6 +107,23 @@ class KeywordActivity : AppCompatActivity() {
 
         })
 
+    }
+
+    fun onAddChip(view: KeywordActivity, i:String) {
+        val chip = Chip(this)
+        chip.text = i
+        chip.setChipBackgroundColorResource(R.color.bg_chip_state_list)
+        val drawble = ChipDrawable.createFromAttributes(this,null,0, R.style.Widget_MaterialComponents_Chip_Choice)
+        chip.setChipDrawable(drawble)
+        chip.setOnClickListener{
+            Toast.makeText(this@KeywordActivity,"추가됨" ,Toast.LENGTH_SHORT).show()
+            var str_data = i.replace("#","")
+            str_data = str_data.replace("이랑 왔어요","")
+            str_data = str_data.replace("랑 왔어요","")
+
+            selectedKeywordList.add(str_data)
+        }
+        chipgroup.addView(chip)
     }
 
     private fun callTodoList() {

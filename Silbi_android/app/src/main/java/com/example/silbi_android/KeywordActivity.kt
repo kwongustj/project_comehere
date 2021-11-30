@@ -31,6 +31,10 @@ class KeywordActivity: AppCompatActivity() {
         findViewById<Chip>(R.id.chip)
     }
 
+    private val btn1: AppCompatButton by lazy {
+        findViewById<AppCompatButton>(R.id.btn1)
+    }
+
     lateinit var mRetrofit :Retrofit
     lateinit var mRetrofitAPI: RetrofitAPI
     lateinit var mCallTodoList : Call<JsonObject>
@@ -53,6 +57,10 @@ class KeywordActivity: AppCompatActivity() {
         bottomSheetDialog.dismissWithAnimation
 
         buildingName.setText(intent.getStringExtra("building"))
+
+        btn1.setOnClickListener {
+            startActivity(Intent(this, Keyword2Activity::class.java))
+        }
 
 
         setRetrofit()

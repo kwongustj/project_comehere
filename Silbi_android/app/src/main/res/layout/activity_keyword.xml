@@ -116,49 +116,7 @@
             android:layout_height="wrap_content"
             android:paddingLeft="40dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/purpose">
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip5"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="#배고파요"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                app:chipBackgroundColor="@color/bg_chip_state_list" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip6"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="#옷사고싶어요"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                app:chipBackgroundColor="@color/bg_chip_state_list" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip7"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="#가구보러왔어요"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                app:chipBackgroundColor="@color/bg_chip_state_list" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip8"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="#카페에서쉬고싶어요"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                app:chipBackgroundColor="@color/bg_chip_state_list" />
-
-        </com.google.android.material.chip.ChipGroup>
+            app:layout_constraintTop_toBottomOf="@id/purpose"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn1"

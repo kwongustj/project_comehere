@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
@@ -15,58 +14,58 @@
         tools:layout_editor_absoluteX="-17dp"
         tools:layout_editor_absoluteY="-17dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/rounded_inside"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:id="@+id/explain1"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nanoom"
-            android:text="키워드를 선택해주시면"
-            android:textSize="20dp"
-            android:paddingLeft="40dp"
-            android:paddingTop="20dp"
-            android:textStyle="bold"
+            android:background="@color/rounded_inside"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/buildingName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanoom"
-            android:text="-"
-            android:paddingLeft="40dp"
-            android:textSize="25dp"
-            android:textColor="@color/black"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@id/explain2"
-            app:layout_constraintStart_toStartOf="@id/explain1"
-            app:layout_constraintTop_toBottomOf="@id/explain1" />
+            <TextView
+                android:id="@+id/explain1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanoom"
+                android:paddingLeft="40dp"
+                android:paddingTop="20dp"
+                android:text="키워드를 선택해주시면"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/buildingName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanoom"
+                android:paddingLeft="40dp"
+                android:text="-"
+                android:textColor="@color/black"
+                android:textSize="25dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@id/explain2"
+                app:layout_constraintStart_toStartOf="@id/explain1"
+                app:layout_constraintTop_toBottomOf="@id/explain1" />
 
 
-        <TextView
-            android:id="@+id/explain2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nanoom"
-            android:text="에서의 최적의 장소를 찾아드릴게요!!"
-            android:textSize="20dp"
-            android:paddingLeft="40dp"
-            android:textStyle="bold"
-            android:paddingBottom="10dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/buildingName" />
+            <TextView
+                android:id="@+id/explain2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nanoom"
+                android:paddingLeft="40dp"
+                android:paddingBottom="10dp"
+                android:text="에서의 최적의 장소를 찾아드릴게요!!"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/buildingName" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         <TextView
@@ -75,24 +74,32 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/nanoom"
+            android:paddingLeft="40dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
-            android:paddingLeft="40dp"
             android:text="1. 같이 온 사람"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/scrollView1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraintLayout2"
-            app:layout_constraintBottom_toTopOf="@id/chipgroup" />
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout2" />
 
+        <HorizontalScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/people">
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/chipgroup"
-            android:paddingLeft="40dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="40dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/people"/>
+            app:layout_constraintTop_toBottomOf="@id/people" />
+        </HorizontalScrollView>
 
         <TextView
             android:id="@+id/purpose"
@@ -100,29 +107,38 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/nanoom"
+            android:paddingLeft="40dp"
             android:paddingTop="10dp"
             android:paddingBottom="20dp"
             android:text="2. 목적"
-            android:paddingLeft="40dp"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chipgroup" />
+            app:layout_constraintTop_toBottomOf="@id/scrollView1" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipgroup2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="40dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/purpose"/>
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:scrollbars="none"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/purpose">
+
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipgroup2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/purpose" />
+        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="10dp"
             android:backgroundTint="@color/button"
             android:fontFamily="@font/nanoom"
             android:text="다음"
@@ -131,7 +147,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/chipgroup2" />
+            app:layout_constraintTop_toBottomOf="@id/scrollView" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

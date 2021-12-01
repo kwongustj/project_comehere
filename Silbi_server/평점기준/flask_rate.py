@@ -39,6 +39,7 @@ class hello(Resource):
     def get(self):
         count = 0
         args_dict = request.args.to_dict()
+        print(args_dict)
         for key, value in args_dict.items():
             if value == " ":
                 count = count + 1
@@ -60,18 +61,21 @@ class hello(Resource):
                 shop = df_list_result[i][1].split(' ')
                 df_list_result[i][1] = shop[0]
             Todos = {"todo" + str(i): {"task": string[1]} for i, string in enumerate(df_list_result)}
-            print(Todos)
-            print(json.dumps(Todos))
-            print('')
-            print(json.dumps(Todos, ensure_ascii=False, indent=4))
+            # print(Todos)
+            # print(json.dumps(Todos))
+            # print('')
+            # print(json.dumps(Todos, ensure_ascii=False, indent=4))
             return Todos
         else:
-            print(args_dict)
-
+            lst = list(args_dict.values())
+            df2 = pd.read_excel('keyword_select.xlsx')
+            df2_list = df2.values.tolist()
+            for i in df2_list:
+                if i[0] in lst:
+                    print(i)
 
 api.add_resource(TodoList, '/todos/')
 api.add_resource(hello, '/hello')
 
 if __name__ == '__main__':
-    app.run(host="172.30.1.13", port=5000, debug=True)
-
+    app.run(host="192.168.0.10", port=5000, debug=True)

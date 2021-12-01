@@ -61,18 +61,34 @@ class hello(Resource):
                 shop = df_list_result[i][1].split(' ')
                 df_list_result[i][1] = shop[0]
             Todos = {"todo" + str(i): {"task": string[1]} for i, string in enumerate(df_list_result)}
-            # print(Todos)
-            # print(json.dumps(Todos))
-            # print('')
-            # print(json.dumps(Todos, ensure_ascii=False, indent=4))
+            print(Todos)
+            print(json.dumps(Todos))
+            print('')
+            print(json.dumps(Todos, ensure_ascii=False, indent=4))
             return Todos
         else:
             lst = list(args_dict.values())
             df2 = pd.read_excel('keyword_select.xlsx')
             df2_list = df2.values.tolist()
+            keyword2_list = []
+            submit = {}
+            dictdict = {}
             for i in df2_list:
                 if i[0] in lst:
-                    print(i)
+                    print(keyword2_list)
+                    a= i[0]
+                    del i[0]
+                    string = "".join(i)
+                    dic1 = {a:string}
+                    submit.update(dic1)
+                    print(submit)
+                    dictdict["1"] = submit
+                    print(dictdict)
+                    print(json.dumps(dictdict))
+                    print('')
+                    print(json.dumps(dictdict, ensure_ascii=False, indent=4))
+
+
 
 api.add_resource(TodoList, '/todos/')
 api.add_resource(hello, '/hello')

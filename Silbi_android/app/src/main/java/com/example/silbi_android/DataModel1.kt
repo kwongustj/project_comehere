@@ -1,7 +1,7 @@
 package com.example.silbi_android
 
 
-class DataModel {
+class DataModel1 {
     data class TodoInfo0(val todo0 : TaskInfo)
     data class TodoInfo1(val todo1 : TaskInfo)
     data class TodoInfo2(val todo2 : TaskInfo)

@@ -1,6 +1,6 @@
 import json
 import pandas as pd
-from flask import Flask
+from flask import Flask, request, render_template
 from flask_restful import Resource, Api, reqparse, abort
 
 app = Flask(__name__)
@@ -31,8 +31,42 @@ class TodoList(Resource):
         print(json.dumps(Todos, ensure_ascii=False, indent=4))
         return Todos
 
+# Todos = {
+#     'todo1': {"task": "exercise"}
+# }
+
+class hello(Resource):
+    def get(self):
+        count = 0
+        args_dict = request.args.to_dict()
+        print(args_dict)
+
+        lst = list(args_dict.values())
+        df2 = pd.read_excel('keyword_select.xlsx')
+        df2_list = df2.values.tolist()
+        keyword2_list = []
+        submit = {}
+        dictdict = {}
+        count = 1
+        for i in df2_list:
+            if i[0] in lst:
+                print(keyword2_list)
+                a= i[0]
+                del i[0]
+                string = "".join(i)
+                dic1 = {"data":string}
+                dictdict["todo"+str(count)] = dic1
+                count = count + 1
+        print(dictdict)
+        print(json.dumps(dictdict))
+        print('')
+        print(json.dumps(dictdict, ensure_ascii=False, indent=4))
+        return dictdict
+
+
+
 api.add_resource(TodoList, '/todos/')
+api.add_resource(hello, '/hello')
 
 if __name__ == '__main__':
     app.run(host="192.168.0.10", port=5000, debug=True)
-

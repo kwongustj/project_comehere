@@ -39,10 +39,9 @@ class KeywordActivity : AppCompatActivity() {
 
     val TAG = "TAG_MainActivity"
     var array = Array<String>(10, { "" })
-    var array2 = Array<String>(10, { "" })
 
     var RateList = arrayListOf<rate>()
-    var selectedKeywordList =arrayListOf<String>(" "," "," "," ")
+    var selectedKeywordList = arrayListOf<String>(" ", " ", " ", " ")
 
     private val btn1: AppCompatButton by lazy {
         findViewById<AppCompatButton>(R.id.btn1)
@@ -52,28 +51,26 @@ class KeywordActivity : AppCompatActivity() {
     lateinit var mRetrofitAPI: RetrofitAPI
     lateinit var mCallTodoList: Call<JsonObject>
 
-    lateinit var mRetrofit2: Retrofit
-    lateinit var mRetrofitAPI2: RetrofitAPI2
-    lateinit var mCallTodoList2: Call<JsonObject>
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_keyword)
 
         var list: List<String> = listOf("#가족과 왔어요", "#연인과 왔어요", "#친구와 왔어요", "#아이와 왔어요")
-        var list2: List<String> = listOf("#배고파요",
-                "#옷사고싶어요",
-                "#가구&가전제품 보러왔어요",
-                "#카페에서 쉬고싶어요",
-                "#편의시설이 궁금해요",
-                "#꾸미고 싶어요",
-                "#조용한 곳에서 힐링하고 싶어요",
-                "#분위기 있는 곳에 가고싶어요",
-                "#가벼운 간식을 사고싶어요",
-                "#선물을 사러 왔어요",
-                "#생활 용품을 사러 왔어요",
-                "#여가를 즐기고 싶어요",
-                "#화장품&악세서리 구경하고 싶어요")
+        var list2: List<String> = listOf(
+            "#배고파요",
+            "#옷사고싶어요",
+            "#가구&가전제품 보러왔어요",
+            "#카페에서 쉬고싶어요",
+            "#편의시설이 궁금해요",
+            "#꾸미고 싶어요",
+            "#조용한 곳에서 힐링하고 싶어요",
+            "#분위기 있는 곳에 가고싶어요",
+            "#가벼운 간식을 사고싶어요",
+            "#선물을 사러 왔어요",
+            "#생활 용품을 사러 왔어요",
+            "#여가를 즐기고 싶어요",
+            "#화장품&악세서리 구경하고 싶어요"
+        )
 
 
         val database: FirebaseDatabase =
@@ -94,23 +91,16 @@ class KeywordActivity : AppCompatActivity() {
         Log.d("array", array[0])
 
         btn1.setOnClickListener {
-
-            for(i in selectedKeywordList) {
-                Toast.makeText(this@KeywordActivity,i,Toast.LENGTH_SHORT).show()
-            }
-            setRetrofit2()
-            callTodoList2()
-            Log.d("array", array[0])
-            startActivity(Intent(this, Keyword2Activity::class.java))
+            add()
         }
 
 
-        for( i in list) {
-            onAddChip(this,i)
+        for (i in list) {
+            onAddChip(this, i)
         }
 
-        for( i in list2){
-            onAddChip2(this,i)
+        for (i in list2) {
+            onAddChip2(this, i)
         }
         myRef.addValueEventListener(object : ValueEventListener {
 
@@ -142,25 +132,40 @@ class KeywordActivity : AppCompatActivity() {
 
     }
 
-    fun onAddChip(view: KeywordActivity, i:String) {
+    fun add() {
+        var listString = selectedKeywordList.joinToString("  ")
+        val intent = Intent(this, Keyword2Activity::class.java)
+            intent.apply{
+                intent.putExtra("listString", listString)
+                Log.d("listString",listString)
+            }
+        startActivity(intent)
+    }
+    fun onAddChip(view: KeywordActivity, i: String) {
         val chip = Chip(this)
         chip.text = i
         chip.setChipBackgroundColorResource(R.color.bg_chip_state_list)
-        val drawble = ChipDrawable.createFromAttributes(this,null,0, R.style.Widget_MaterialComponents_Chip_Choice)
+        val drawble = ChipDrawable.createFromAttributes(
+            this,
+            null,
+            0,
+            R.style.Widget_MaterialComponents_Chip_Choice
+        )
         chip.setChipDrawable(drawble)
         chip.chipBackgroundColor = ColorStateList(
             arrayOf(
-                intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)),
-            intArrayOf(Color.rgb(220,220,220),Color.rgb(255, 215, 157))
+                intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)
+            ),
+            intArrayOf(Color.rgb(220, 220, 220), Color.rgb(255, 215, 157))
         )
         chip.isCheckable = true
         var check = chip.isChecked
-        chip.setOnClickListener{
-            if(check == true){
+        chip.setOnClickListener {
+            if (check == true) {
                 Toast.makeText(this@KeywordActivity, "빼", Toast.LENGTH_SHORT).show()
-                var str_data = i.replace("#","")
-                str_data = str_data.replace("과 왔어요","")
-                str_data = str_data.replace("와 왔어요","")
+                var str_data = i.replace("#", "")
+                str_data = str_data.replace("과 왔어요", "")
+                str_data = str_data.replace("와 왔어요", "")
                 check = false
                 selectedKeywordList.remove(str_data)
                 selectedKeywordList.add(" ")
@@ -168,13 +173,13 @@ class KeywordActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this@KeywordActivity, "추가됨", Toast.LENGTH_SHORT).show()
                 var str_data = i.replace("#", "")
-                str_data = str_data.replace("과 왔어요","")
-                str_data = str_data.replace("와 왔어요","")
+                str_data = str_data.replace("과 왔어요", "")
+                str_data = str_data.replace("와 왔어요", "")
                 check = true
-                if(selectedKeywordList.contains(" ") == true) {
+                if (selectedKeywordList.contains(" ") == true) {
                     selectedKeywordList.remove(" ")
                     selectedKeywordList.add(str_data)
-                }else{
+                } else {
                     selectedKeywordList.add(str_data)
                 }
             }
@@ -182,9 +187,14 @@ class KeywordActivity : AppCompatActivity() {
         chipgroup.addView(chip)
     }
 
-    fun onAddChip2(view: KeywordActivity, i:String) {
+    fun onAddChip2(view: KeywordActivity, i: String) {
         val chip = Chip(this)
-        val drawble = ChipDrawable.createFromAttributes(this,null,0, R.style.Widget_MaterialComponents_Chip_Choice)
+        val drawble = ChipDrawable.createFromAttributes(
+            this,
+            null,
+            0,
+            R.style.Widget_MaterialComponents_Chip_Choice
+        )
         var check = chip.isChecked
 
         chip.text = i
@@ -193,11 +203,12 @@ class KeywordActivity : AppCompatActivity() {
         chip.isCheckable = true
         chip.chipBackgroundColor = ColorStateList(
             arrayOf(
-                intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)),
-            intArrayOf(Color.rgb(220,220,220),Color.rgb(255, 215, 157))
+                intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)
+            ),
+            intArrayOf(Color.rgb(220, 220, 220), Color.rgb(255, 215, 157))
         )
-        chip.setOnClickListener{
-            if(check == true){
+        chip.setOnClickListener {
+            if (check == true) {
                 Toast.makeText(this@KeywordActivity, "빼", Toast.LENGTH_SHORT).show()
                 var str_data = i.replace("#", "")
                 selectedKeywordList.remove(str_data)
@@ -205,11 +216,12 @@ class KeywordActivity : AppCompatActivity() {
                 check = false
             } else {
                 Toast.makeText(this@KeywordActivity, "추가됨", Toast.LENGTH_SHORT).show()
-                var str_data = i.replace("#", "")
-                if(selectedKeywordList.contains(" ")) {
+                if (selectedKeywordList.contains(" ")) {
                     selectedKeywordList.remove(" ")
+                    var str_data = i.replace("#", "")
                     selectedKeywordList.add(str_data)
-                }else{
+                } else {
+                    var str_data = i.replace("#", "")
                     selectedKeywordList.add(str_data)
                 }
                 check = true
@@ -222,11 +234,6 @@ class KeywordActivity : AppCompatActivity() {
         mCallTodoList = mRetrofitAPI.getTodoList()
         mCallTodoList.enqueue(mRetrofitCallback)//응답을 큐 대기열에 넣는다.
     }
-
-    private fun callTodoList2() {
-        mCallTodoList2 = mRetrofitAPI2.getTodoList(selectedKeywordList[0],selectedKeywordList[1],selectedKeywordList[2],selectedKeywordList[3])
-        mCallTodoList2.enqueue(mRetrofitCallback2)//응답을 큐 대기열에 넣는다.
-   }
 
     private val mRetrofitCallback = (object : Callback<JsonObject> {
         override fun onFailure(call: Call<JsonObject>, t: Throwable) {
@@ -261,30 +268,10 @@ class KeywordActivity : AppCompatActivity() {
             val dataParsed9 = mGson.fromJson(result, DataModel1.TodoInfo9::class.java)
             array.set(9, dataParsed9.todo9.task)
 
-            
-        }
-    })
-
-    private val mRetrofitCallback2 = (object : Callback<JsonObject> {
-        override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-            t.printStackTrace()
-            Log.d(TAG, "에러입니다. => ${t.message.toString()}")
-
-        }
-
-        override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-            val result = response.body()
-            Log.d(TAG, "결과는 => $result")
-
-            var mGson = Gson()
-            val dataParsed0 = mGson.fromJson(result, DataModel2.TodoInfo10::class.java)
-            array2.set(0, dataParsed0.todo1.data)
-            val dataParsed1 = mGson.fromJson(result, DataModel2.TodoInfo11::class.java)
-            array2.set(1, dataParsed1.todo2.data)
-
 
         }
     })
+
 
     private fun setRetrofit() {
         //레트로핏으로 가져올 url설정하고 세팅
@@ -298,17 +285,6 @@ class KeywordActivity : AppCompatActivity() {
         mRetrofitAPI = mRetrofit.create(RetrofitAPI::class.java)
     }
 
-    private fun setRetrofit2() {
-        //레트로핏으로 가져올 url설정하고 세팅
-        mRetrofit2 = Retrofit
-            .Builder()
-            .baseUrl(getString(R.string.baseUrl))
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        //인터페이스로 만든 레트로핏 api요청 받는 것 변수로 등록
-        mRetrofitAPI2 = mRetrofit2.create(RetrofitAPI2::class.java)
-    }
 
 
 }

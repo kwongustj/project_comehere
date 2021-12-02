@@ -12,6 +12,6 @@ class DataModel1 {
     data class TodoInfo7(val todo7 : TaskInfo)
     data class TodoInfo8(val todo8 : TaskInfo)
     data class TodoInfo9(val todo9 : TaskInfo)
-    data class TaskInfo(val task : String)
+    data class TaskInfo(val task : String,val url: String)
 
 }

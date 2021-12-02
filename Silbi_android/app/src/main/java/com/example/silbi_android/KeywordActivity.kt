@@ -97,6 +97,7 @@ class KeywordActivity : AppCompatActivity() {
 
         for (i in list) {
             onAddChip(this, i)
+            Log.d("1: ", i)
         }
 
         for (i in list2) {
@@ -137,7 +138,7 @@ class KeywordActivity : AppCompatActivity() {
         val intent = Intent(this, Keyword2Activity::class.java)
             intent.apply{
                 intent.putExtra("listString", listString)
-                Log.d("listString",listString)
+                intent.putExtra("building",buildingName.text)
             }
         startActivity(intent)
     }

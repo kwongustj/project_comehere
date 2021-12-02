@@ -14,6 +14,7 @@ import com.google.android.material.chip.ChipDrawable
 import com.google.android.material.chip.ChipGroup
 import com.google.gson.Gson
 import com.google.gson.JsonObject
+import kotlinx.android.synthetic.main.activity_keyword.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -48,6 +49,8 @@ class Keyword2Activity: AppCompatActivity(){
                 setRetrofit2()
                 callTodoList2()
             }
+
+        buildingName.setText(intent.getStringExtra("building"))
 
             Toast.makeText(this@Keyword2Activity, listString, Toast.LENGTH_SHORT).show()
 

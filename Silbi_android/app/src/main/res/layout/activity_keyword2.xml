@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    >
+    tools:context=".MainActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
@@ -20,19 +19,19 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/rounded_inside"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/explain1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanoom"
-                android:text="키워드를 선택해주시면"
-                android:textSize="20dp"
                 android:paddingLeft="40dp"
                 android:paddingTop="20dp"
+                android:text="키워드를 선택해주시면"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -42,10 +41,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanoom"
-                android:text="-"
                 android:paddingLeft="40dp"
-                android:textSize="25dp"
+                android:text="-"
                 android:textColor="@color/black"
+                android:textSize="25dp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toTopOf="@id/explain2"
                 app:layout_constraintStart_toStartOf="@id/explain1"
@@ -57,11 +56,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nanoom"
+                android:paddingLeft="40dp"
+                android:paddingBottom="10dp"
                 android:text="에서의 최적의 장소를 찾아드릴게요!!"
                 android:textSize="20dp"
-                android:paddingLeft="40dp"
                 android:textStyle="bold"
-                android:paddingBottom="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/buildingName" />
 
@@ -75,71 +74,33 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:fontFamily="@font/nanoom"
+            android:paddingLeft="40dp"
             android:paddingTop="20dp"
             android:paddingBottom="20dp"
-            android:paddingLeft="40dp"
-            android:text= "3. 마음에 드는 키워드 선택"
+            android:text="3. 마음에 드는 키워드 선택"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/scrollView1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/constraintLayout2"
-            app:layout_constraintBottom_toTopOf="@id/chipgroup" />
+            app:layout_constraintTop_toBottomOf="@id/constraintLayout2" />
 
-        <com.google.android.material.chip.ChipGroup
-            android:id="@+id/chipgroup"
-            android:paddingLeft="40dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:scrollbars="none"
+            app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/people">
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip1"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipgroup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="10dp"
-                android:clickable="true"
-                android:text="#카레"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                app:chipBackgroundColor="@color/bg_chip_state_list" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip2"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="#도넛"
-                android:layout_marginEnd="10dp"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                app:chipBackgroundColor="@color/bg_chip_state_list" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip3"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="#냉장고"
-                android:layout_marginEnd="10dp"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                app:chipBackgroundColor="@color/bg_chip_state_list" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip3ㅇ4"
-                style="@style/Widget.MaterialComponents.Chip.Choice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:text="#선물"
-                android:theme="@style/Theme.MaterialComponents.Light"
-                app:chipBackgroundColor="@color/bg_chip_state_list" />
-
-        </com.google.android.material.chip.ChipGroup>
-
-
+                android:paddingLeft="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/people" />
+        </ScrollView>
 
 
         <androidx.appcompat.widget.AppCompatButton

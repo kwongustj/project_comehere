@@ -32,7 +32,7 @@
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge"/>
         <activity
             android:name=".Keyword2Activity"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
+            android:theme="@style/Theme.MaterialComponents.Light.NoActionBar.Bridge"/>
         <activity
             android:name=".RecommendActivity"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>

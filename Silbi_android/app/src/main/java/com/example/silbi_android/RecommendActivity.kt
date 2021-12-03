@@ -20,6 +20,8 @@ class RecommendActivity: AppCompatActivity(){
     lateinit var mRetrofitAPI3: RetrofitAPI3
     lateinit var mCallTodoList3: Call<JsonObject>
 
+    var array4 = arrayListOf<String>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recommand)
@@ -66,10 +68,18 @@ class RecommendActivity: AppCompatActivity(){
             val result = response.body()
 
             var mGson = Gson()
-            val  dataParsed0= mGson.fromJson(result, DataModel2.TodoInfo10::class.java)
-            var list = dataParsed0.todo1.data.toString().split(", ")
-            val dataParsed1 = mGson.fromJson(result, DataModel2.TodoInfo11::class.java)
-            list = dataParsed1.todo2.data.toString().split(", ")
+            val dataParsed0 = mGson.fromJson(result, DataModel3.TodoInfo0::class.java)
+            array4.add(dataParsed0.todo0.task)
+            val dataParsed1 = mGson.fromJson(result, DataModel3.TodoInfo1::class.java)
+            array4.add(dataParsed1.todo1.task)
+            val dataParsed2 = mGson.fromJson(result, DataModel3.TodoInfo2::class.java)
+            array4.add(dataParsed2.todo2.task)
+            val dataParsed3 = mGson.fromJson(result, DataModel3.TodoInfo3::class.java)
+            array4.add(dataParsed3.todo3.task)
+            val dataParsed4 = mGson.fromJson(result, DataModel3.TodoInfo4::class.java)
+            array4.add(dataParsed4.todo4.task)
+
+            Log.d("받은 점포 명: ", array4.toString())
 
         }
     })

@@ -26,6 +26,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class KeywordActivity : AppCompatActivity() {
 
@@ -39,16 +40,17 @@ class KeywordActivity : AppCompatActivity() {
 
     val TAG = "TAG_MainActivity"
     var array = Array<String>(10, { "" })
+    var array2 = Array<String>(10, { "" })
 
     var RateList = arrayListOf<rate>()
-    var selectedKeywordList =arrayListOf<String>(" "," "," "," ")
+    var selectedKeywordList = arrayListOf<String>(" ", " ", " ", " ")
 
     private val btn1: AppCompatButton by lazy {
         findViewById<AppCompatButton>(R.id.btn1)
     }
 
-    lateinit var mRetrofit2: Retrofit
-    lateinit var mRetrofitAPI2: RetrofitAPI2
+    lateinit var mRetrofit: Retrofit
+    lateinit var mRetrofitAPI: RetrofitAPI
     lateinit var mCallTodoList: Call<JsonObject>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +58,21 @@ class KeywordActivity : AppCompatActivity() {
         setContentView(R.layout.activity_keyword)
 
         var list: List<String> = listOf("#가족과 왔어요", "#연인과 왔어요", "#친구와 왔어요", "#아이와 왔어요")
-        var list2: List<String> = listOf("#배고파요","#옷사고싶어요","#가구&가전제품 보러왔어요","#카페에서놀래요","#편의시설이 궁금해요")
+        var list2: List<String> = listOf(
+            "#배고파요",
+            "#옷사고싶어요",
+            "#가구&가전제품 보러왔어요",
+            "#카페에서 쉬고싶어요",
+            "#편의시설이 궁금해요",
+            "#꾸미고 싶어요",
+            "#조용한 곳에서 힐링하고 싶어요",
+            "#분위기 있는 곳에 가고싶어요",
+            "#가벼운 간식을 사고싶어요",
+            "#선물을 사러 왔어요",
+            "#생활 용품을 사러 왔어요",
+            "#여가를 즐기고 싶어요",
+            "#화장품&악세서리 구경하고 싶어요"
+        )
 
 
         val database: FirebaseDatabase =
@@ -74,26 +90,18 @@ class KeywordActivity : AppCompatActivity() {
 
         setRetrofit()
         callTodoList()
-        Log.d("array", array[0])
 
         btn1.setOnClickListener {
-
-            for(i in selectedKeywordList) {
-                Toast.makeText(this@KeywordActivity,i,Toast.LENGTH_SHORT).show()
-            }
-            setRetrofit()
-            callTodoList()
-            Log.d("array", array[0])
-            startActivity(Intent(this, Keyword2Activity::class.java))
+            add()
         }
 
 
-        for( i in list) {
-            onAddChip(this,i)
+        for (i in list) {
+            onAddChip(this, i)
         }
 
-        for( i in list2){
-            onAddChip2(this,i)
+        for (i in list2) {
+            onAddChip2(this, i)
         }
         myRef.addValueEventListener(object : ValueEventListener {
 
@@ -103,13 +111,17 @@ class KeywordActivity : AppCompatActivity() {
                 for (ds in test.children) {
                     for (i in (0..9)) {
                         if (ds.child("점포이름").getValue().toString() == array[i]) {
+
                             val e1 = rate(
                                 ds.child("점포이름").getValue().toString(),
                                 ds.child("전화번호").getValue().toString(),
-                                ds.child("층수").getValue().toString()
+                                ds.child("층수").getValue().toString(),
+                                array2[i]
+
                             )
                             RateList.add(e1)
                         }
+
 
                     }
                 }
@@ -125,25 +137,40 @@ class KeywordActivity : AppCompatActivity() {
 
     }
 
-    fun onAddChip(view: KeywordActivity, i:String) {
+    fun add() {
+        var listString = selectedKeywordList.joinToString("  ")
+        val intent = Intent(this, Keyword2Activity::class.java)
+            intent.apply{
+                intent.putExtra("listString", listString)
+                intent.putExtra("building",buildingName.text)
+            }
+        startActivity(intent)
+    }
+    fun onAddChip(view: KeywordActivity, i: String) {
         val chip = Chip(this)
         chip.text = i
         chip.setChipBackgroundColorResource(R.color.bg_chip_state_list)
-        val drawble = ChipDrawable.createFromAttributes(this,null,0, R.style.Widget_MaterialComponents_Chip_Choice)
+        val drawble = ChipDrawable.createFromAttributes(
+            this,
+            null,
+            0,
+            R.style.Widget_MaterialComponents_Chip_Choice
+        )
         chip.setChipDrawable(drawble)
         chip.chipBackgroundColor = ColorStateList(
             arrayOf(
-                intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)),
-            intArrayOf(Color.rgb(220,220,220),Color.rgb(255, 215, 157))
+                intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)
+            ),
+            intArrayOf(Color.rgb(220, 220, 220), Color.rgb(255, 215, 157))
         )
         chip.isCheckable = true
         var check = chip.isChecked
-        chip.setOnClickListener{
-            if(check == true){
+        chip.setOnClickListener {
+            if (check == true) {
                 Toast.makeText(this@KeywordActivity, "빼", Toast.LENGTH_SHORT).show()
-                var str_data = i.replace("#","")
-                str_data = str_data.replace("과 왔어요","")
-                str_data = str_data.replace("와 왔어요","")
+                var str_data = i.replace("#", "")
+                str_data = str_data.replace("과 왔어요", "")
+                str_data = str_data.replace("와 왔어요", "")
                 check = false
                 selectedKeywordList.remove(str_data)
                 selectedKeywordList.add(" ")
@@ -151,13 +178,13 @@ class KeywordActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(this@KeywordActivity, "추가됨", Toast.LENGTH_SHORT).show()
                 var str_data = i.replace("#", "")
-                str_data = str_data.replace("과 왔어요","")
-                str_data = str_data.replace("와 왔어요","")
+                str_data = str_data.replace("과 왔어요", "")
+                str_data = str_data.replace("와 왔어요", "")
                 check = true
-                if(selectedKeywordList.contains(" ") == true) {
+                if (selectedKeywordList.contains(" ") == true) {
                     selectedKeywordList.remove(" ")
                     selectedKeywordList.add(str_data)
-                }else{
+                } else {
                     selectedKeywordList.add(str_data)
                 }
             }
@@ -165,21 +192,28 @@ class KeywordActivity : AppCompatActivity() {
         chipgroup.addView(chip)
     }
 
-    fun onAddChip2(view: KeywordActivity, i:String) {
+    fun onAddChip2(view: KeywordActivity, i: String) {
         val chip = Chip(this)
+        val drawble = ChipDrawable.createFromAttributes(
+            this,
+            null,
+            0,
+            R.style.Widget_MaterialComponents_Chip_Choice
+        )
+        var check = chip.isChecked
+
         chip.text = i
         chip.setChipBackgroundColorResource(R.color.bg_chip_state_list)
-        val drawble = ChipDrawable.createFromAttributes(this,null,0, R.style.Widget_MaterialComponents_Chip_Choice)
         chip.setChipDrawable(drawble)
+        chip.isCheckable = true
         chip.chipBackgroundColor = ColorStateList(
             arrayOf(
-                intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)),
-            intArrayOf(Color.rgb(220,220,220),Color.rgb(255, 215, 157))
+                intArrayOf(-android.R.attr.state_checked), intArrayOf(android.R.attr.state_checked)
+            ),
+            intArrayOf(Color.rgb(220, 220, 220), Color.rgb(255, 215, 157))
         )
-        chip.isCheckable = true
-        var check = chip.isChecked
-        chip.setOnClickListener{
-            if(check == true){
+        chip.setOnClickListener {
+            if (check == true) {
                 Toast.makeText(this@KeywordActivity, "빼", Toast.LENGTH_SHORT).show()
                 var str_data = i.replace("#", "")
                 selectedKeywordList.remove(str_data)
@@ -187,11 +221,12 @@ class KeywordActivity : AppCompatActivity() {
                 check = false
             } else {
                 Toast.makeText(this@KeywordActivity, "추가됨", Toast.LENGTH_SHORT).show()
-                var str_data = i.replace("#", "")
-                if(selectedKeywordList.contains(" ")) {
+                if (selectedKeywordList.contains(" ")) {
                     selectedKeywordList.remove(" ")
+                    var str_data = i.replace("#", "")
                     selectedKeywordList.add(str_data)
-                }else{
+                } else {
+                    var str_data = i.replace("#", "")
                     selectedKeywordList.add(str_data)
                 }
                 check = true
@@ -201,7 +236,7 @@ class KeywordActivity : AppCompatActivity() {
     }
 
     private fun callTodoList() {
-        mCallTodoList = mRetrofitAPI2.getTodoList(selectedKeywordList[0],selectedKeywordList[1],selectedKeywordList[2],selectedKeywordList[3])
+        mCallTodoList = mRetrofitAPI.getTodoList()
         mCallTodoList.enqueue(mRetrofitCallback)//응답을 큐 대기열에 넣는다.
     }
 
@@ -217,42 +252,54 @@ class KeywordActivity : AppCompatActivity() {
             Log.d(TAG, "결과는 => $result")
 
             var mGson = Gson()
-            val dataParsed0 = mGson.fromJson(result, DataModel.TodoInfo0::class.java)
+            val dataParsed0 = mGson.fromJson(result, DataModel1.TodoInfo0::class.java)
             array.set(0, dataParsed0.todo0.task)
-            val dataParsed1 = mGson.fromJson(result, DataModel.TodoInfo1::class.java)
+            array2.set(0, dataParsed0.todo0.url)
+            val dataParsed1 = mGson.fromJson(result, DataModel1.TodoInfo1::class.java)
             array.set(1, dataParsed1.todo1.task)
-            val dataParsed2 = mGson.fromJson(result, DataModel.TodoInfo2::class.java)
+            array2.set(1, dataParsed1.todo1.url)
+            val dataParsed2 = mGson.fromJson(result, DataModel1.TodoInfo2::class.java)
             array.set(2, dataParsed2.todo2.task)
-            val dataParsed3 = mGson.fromJson(result, DataModel.TodoInfo3::class.java)
+            array2.set(2, dataParsed2.todo2.url)
+            val dataParsed3 = mGson.fromJson(result, DataModel1.TodoInfo3::class.java)
             array.set(3, dataParsed3.todo3.task)
-            val dataParsed4 = mGson.fromJson(result, DataModel.TodoInfo4::class.java)
+            array2.set(3, dataParsed3.todo3.url)
+            val dataParsed4 = mGson.fromJson(result, DataModel1.TodoInfo4::class.java)
             array.set(4, dataParsed4.todo4.task)
-            val dataParsed5 = mGson.fromJson(result, DataModel.TodoInfo5::class.java)
+            array2.set(4, dataParsed4.todo4.url)
+            val dataParsed5 = mGson.fromJson(result, DataModel1.TodoInfo5::class.java)
             array.set(5, dataParsed5.todo5.task)
-            val dataParsed6 = mGson.fromJson(result, DataModel.TodoInfo6::class.java)
+            array2.set(5, dataParsed5.todo5.url)
+            val dataParsed6 = mGson.fromJson(result, DataModel1.TodoInfo6::class.java)
             array.set(6, dataParsed6.todo6.task)
-            val dataParsed7 = mGson.fromJson(result, DataModel.TodoInfo7::class.java)
+            array2.set(6, dataParsed6.todo6.url)
+            val dataParsed7 = mGson.fromJson(result, DataModel1.TodoInfo7::class.java)
             array.set(7, dataParsed7.todo7.task)
-            val dataParsed8 = mGson.fromJson(result, DataModel.TodoInfo8::class.java)
+            array2.set(7, dataParsed7.todo7.url)
+            val dataParsed8 = mGson.fromJson(result, DataModel1.TodoInfo8::class.java)
             array.set(8, dataParsed8.todo8.task)
-            val dataParsed9 = mGson.fromJson(result, DataModel.TodoInfo9::class.java)
+            array2.set(8, dataParsed8.todo8.url)
+            val dataParsed9 = mGson.fromJson(result, DataModel1.TodoInfo9::class.java)
             array.set(9, dataParsed9.todo9.task)
+            array2.set(9, dataParsed9.todo9.url)
 
-            
+            Log.d("array",Arrays.toString(array))
         }
     })
 
+
     private fun setRetrofit() {
         //레트로핏으로 가져올 url설정하고 세팅
-        mRetrofit2 = Retrofit
+        mRetrofit = Retrofit
             .Builder()
             .baseUrl(getString(R.string.baseUrl))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
         //인터페이스로 만든 레트로핏 api요청 받는 것 변수로 등록
-        mRetrofitAPI2 = mRetrofit2.create(RetrofitAPI2::class.java)
+        mRetrofitAPI = mRetrofit.create(RetrofitAPI::class.java)
     }
+
 
 
 }

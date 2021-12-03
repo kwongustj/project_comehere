@@ -26,6 +26,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 class KeywordActivity : AppCompatActivity() {
 
@@ -39,6 +40,7 @@ class KeywordActivity : AppCompatActivity() {
 
     val TAG = "TAG_MainActivity"
     var array = Array<String>(10, { "" })
+    var array2 = Array<String>(10, { "" })
 
     var RateList = arrayListOf<rate>()
     var selectedKeywordList = arrayListOf<String>(" ", " ", " ", " ")
@@ -88,7 +90,6 @@ class KeywordActivity : AppCompatActivity() {
 
         setRetrofit()
         callTodoList()
-        Log.d("array", array[0])
 
         btn1.setOnClickListener {
             add()
@@ -97,7 +98,6 @@ class KeywordActivity : AppCompatActivity() {
 
         for (i in list) {
             onAddChip(this, i)
-            Log.d("1: ", i)
         }
 
         for (i in list2) {
@@ -111,13 +111,17 @@ class KeywordActivity : AppCompatActivity() {
                 for (ds in test.children) {
                     for (i in (0..9)) {
                         if (ds.child("점포이름").getValue().toString() == array[i]) {
+
                             val e1 = rate(
                                 ds.child("점포이름").getValue().toString(),
                                 ds.child("전화번호").getValue().toString(),
-                                ds.child("층수").getValue().toString()
+                                ds.child("층수").getValue().toString(),
+                                array2[i]
+
                             )
                             RateList.add(e1)
                         }
+
 
                     }
                 }
@@ -250,26 +254,36 @@ class KeywordActivity : AppCompatActivity() {
             var mGson = Gson()
             val dataParsed0 = mGson.fromJson(result, DataModel1.TodoInfo0::class.java)
             array.set(0, dataParsed0.todo0.task)
+            array2.set(0, dataParsed0.todo0.url)
             val dataParsed1 = mGson.fromJson(result, DataModel1.TodoInfo1::class.java)
             array.set(1, dataParsed1.todo1.task)
+            array2.set(1, dataParsed1.todo1.url)
             val dataParsed2 = mGson.fromJson(result, DataModel1.TodoInfo2::class.java)
             array.set(2, dataParsed2.todo2.task)
+            array2.set(2, dataParsed2.todo2.url)
             val dataParsed3 = mGson.fromJson(result, DataModel1.TodoInfo3::class.java)
             array.set(3, dataParsed3.todo3.task)
+            array2.set(3, dataParsed3.todo3.url)
             val dataParsed4 = mGson.fromJson(result, DataModel1.TodoInfo4::class.java)
             array.set(4, dataParsed4.todo4.task)
+            array2.set(4, dataParsed4.todo4.url)
             val dataParsed5 = mGson.fromJson(result, DataModel1.TodoInfo5::class.java)
             array.set(5, dataParsed5.todo5.task)
+            array2.set(5, dataParsed5.todo5.url)
             val dataParsed6 = mGson.fromJson(result, DataModel1.TodoInfo6::class.java)
             array.set(6, dataParsed6.todo6.task)
+            array2.set(6, dataParsed6.todo6.url)
             val dataParsed7 = mGson.fromJson(result, DataModel1.TodoInfo7::class.java)
             array.set(7, dataParsed7.todo7.task)
+            array2.set(7, dataParsed7.todo7.url)
             val dataParsed8 = mGson.fromJson(result, DataModel1.TodoInfo8::class.java)
             array.set(8, dataParsed8.todo8.task)
+            array2.set(8, dataParsed8.todo8.url)
             val dataParsed9 = mGson.fromJson(result, DataModel1.TodoInfo9::class.java)
             array.set(9, dataParsed9.todo9.task)
+            array2.set(9, dataParsed9.todo9.url)
 
-
+            Log.d("array",Arrays.toString(array))
         }
     })
 

@@ -26,10 +26,11 @@ class Keyword2Activity: AppCompatActivity(){
     lateinit var mRetrofit2: Retrofit
     lateinit var mRetrofitAPI2: RetrofitAPI2
     lateinit var mCallTodoList2: Call<JsonObject>
+
     private val chipgroup: ChipGroup by lazy {
         findViewById<ChipGroup>(R.id.chipgroup)
     }
-    var selectedKeywordList = arrayListOf<String>(" ", " ", " ", " ")
+    var selectedKeywordList = arrayListOf<String>()
     var array2 = arrayListOf<String>()
     var array3 = arrayListOf<String>()
 
@@ -56,7 +57,12 @@ class Keyword2Activity: AppCompatActivity(){
 
 
         Button.setOnClickListener {
-            startActivity(Intent(this, RecommendActivity::class.java))
+            var string = selectedKeywordList.joinToString(" ")
+            val intent = Intent(this, RecommendActivity::class.java)
+            intent.apply{
+                intent.putExtra("string", string)
+            }
+            startActivity(intent)
         }
     }
 

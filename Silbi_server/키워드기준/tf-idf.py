@@ -3,7 +3,7 @@ import pandas as pd
 from math import log
 
 
-read_xlsx = load_workbook(r'review.xlsx')
+read_xlsx = load_workbook(r'../../project_Silbi/Silbi_server/키워드기준/review.xlsx')
 read_sheet = read_xlsx.active
 
 

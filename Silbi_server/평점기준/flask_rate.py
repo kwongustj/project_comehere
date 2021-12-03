@@ -2,6 +2,9 @@ import json
 import pandas as pd
 from flask import Flask, request, render_template
 from flask_restful import Resource, Api, reqparse, abort
+from openpyxl import load_workbook
+import pandas as pd
+from math import log
 
 app = Flask(__name__)
 api = Api(app)
@@ -67,10 +70,114 @@ class hello(Resource):
         print(json.dumps(dictdict, ensure_ascii=False, indent=4))
         return dictdict
 
+class second_keyword(Resource):
+    def get(self):
+        args_dict = request.args.to_dict()
+        print(args_dict)
+
+        lst = list(args_dict.values())
+        df2 = pd.read_excel('keyword_select.xlsx')
+        df2_list = df2.values.tolist()
+        print("df2)list: ",df2_list)
+        keyword2_list = []
+        dictdict = {}
+        count = 1
+        for i in df2_list:
+            if i[0] in lst:
+                print(keyword2_list)
+                a= i[0]
+                del i[0]
+                string = "".join(i)
+                dic1 = {"data":string}
+                dictdict["todo"+str(count)] = dic1
+                print("print_dictdict: ", dictdict)
+                count = count + 1
+        print(dictdict)
+        print(json.dumps(dictdict))
+        print('')
+        print(json.dumps(dictdict, ensure_ascii=False, indent=4))
+        return dictdict
+
+class keyword2(Resource):
+    def get(self):
+        args_dict = request.args.to_dict()
+        vocab = list(args_dict.values())
+        read_xlsx = load_workbook(r'review.xlsx')
+        read_sheet = read_xlsx.active
+
+        name_col = read_sheet['C']
+        docs = []
+        for cell in name_col:
+            docs.append(cell.value)
+
+        name_col = read_sheet['B']
+        doc = []
+        for cell in name_col:
+            doc.append(cell.value)
+
+        vocab.sort()
+
+        N = len(docs)  # 총 문서의 수
+
+        def tf(t, d):
+            return d.count(t)
+
+        def idf(t):
+            df = 0
+            for doc in docs:
+                df += t in doc
+            return log(N / (df + 1))
+
+        def tfidf(t, d):
+            return tf(t, d) * idf(t)
+
+        result = []
+        for i in range(N):  # 각 문서에 대해 아래 명령 수행
+            result.append([])
+            d = docs[i]
+            for j in range(len(vocab)):
+                t = vocab[j]
+                result[-1].append(tf(t, d))
+
+        tf_ = pd.DataFrame(result, columns=vocab)
+        tf_
+
+        result = []
+        for j in range(len(vocab)):
+            t = vocab[j]
+            result.append(idf(t))
+
+        idf_ = pd.DataFrame(result, index=vocab, columns=['IDF'])
+        idf_
+
+        result = []
+        for i in range(N):
+            result.append([])
+            d = docs[i]
+
+            for j in range(len(vocab)):
+                t = vocab[j]
+                result[-1].append(tfidf(t, d))
+
+        tfidf_ = pd.DataFrame(result, doc, columns=vocab)
+        tfidf_['Total'] = tfidf_.sum(axis=1)
+        list_tfidf = tfidf_.sort_values(by=['Total'], axis=0, ascending=False).head(5)
+        list____ = list(list_tfidf.index)
+        print(list____)
+
+        df_list_result = []
+        for i in range(0, 5):
+            df_list_result.append(list____[i])
+        Todos = {"todo" + str(i): {"task": string} for i, string in enumerate(df_list_result)}
+        print(Todos)
+        return Todos
+
 
 
 api.add_resource(TodoList, '/todos/')
 api.add_resource(hello, '/hello')
+api.add_resource(keyword2, '/keyword2')
 
 if __name__ == '__main__':
-    app.run(host="172.30.1.47", port=5000, debug=True)
+    app.run(host="172.30.1.39", port=5000, debug=True)
+

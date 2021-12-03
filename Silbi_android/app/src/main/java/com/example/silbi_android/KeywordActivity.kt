@@ -2,7 +2,6 @@ package com.example.silbi_android
 
 import android.content.Intent
 import android.content.res.ColorStateList
-import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -10,8 +9,6 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
-import androidx.core.content.ContextCompat
-import androidx.core.view.marginRight
 import com.example.myapplication.rate
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.firebase.database.*

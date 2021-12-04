@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_keyword.*
@@ -13,14 +15,19 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.Collections.list
 
 class RecommendActivity: AppCompatActivity(){
 
     lateinit var mRetrofit3: Retrofit
     lateinit var mRetrofitAPI3: RetrofitAPI3
     lateinit var mCallTodoList3: Call<JsonObject>
+    private val viewPager: ViewPager2 by lazy {
+        findViewById<ViewPager2>(R.id.viewpager)
+    }
 
     var array4 = arrayListOf<String>()
+    private var cardslist = mutableListOf<card>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +35,9 @@ class RecommendActivity: AppCompatActivity(){
 
         setRetrofit3()
         callTodoList3()
+
+        initViews()
+
 
     }
 
@@ -93,5 +103,13 @@ class RecommendActivity: AppCompatActivity(){
             .build()
 
         mRetrofitAPI3 = mRetrofit3.create(RetrofitAPI3::class.java)
+    }
+
+
+    private fun initViews() {
+        val cards = listOf(card("gi","gif"),card("gi","gifffff"),card("gi","gif"))
+        viewPager.adapter = cardpagerAdapter(
+            cards
+        )
     }
 }

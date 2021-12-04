@@ -15,36 +15,35 @@ class cardpagerAdapter(
 ): RecyclerView.Adapter<  cardpagerAdapter. CardViewHolder>() {
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
         CardViewHolder(
             LayoutInflater.from(parent.context)
-                .inflate(R.layout.itemcard,parent,false)
+                .inflate(R.layout.itemcard, parent, false)
         )
 
-    override fun onBindViewHolder(holder:  CardViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         holder.bind(cards[position])
     }
 
     override fun getItemCount() = cards.size
 
 
-    class CardViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
-    {
-        private val cardTextView1 : TextView = itemView.findViewById(R.id.name)
-        private val cardImageView : ImageView = itemView.findViewById(R.id.imageView1)
+    class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        private val cardname: TextView = itemView.findViewById(R.id.name)
+        private val cardImage: ImageView = itemView.findViewById(R.id.image)
+        private val cardPhone: TextView = itemView.findViewById(R.id.phone)
+        private val cardfloor: TextView = itemView.findViewById(R.id.floor)
 
         fun bind(card: card) {
 
-            val src = card.texts2
+            val src = card.image
 
-            cardTextView1.text = card.texts
+            cardname.text = card.name
+            cardPhone.text = card.phone
+            cardfloor.text = card.floor
 
-            Glide.with(itemView).load(src).into(cardImageView)
-            cardTextView1.setMovementMethod(ScrollingMovementMethod())
-
-
+            Glide.with(itemView).load(src).into(cardImage)
         }
     }
-
 }

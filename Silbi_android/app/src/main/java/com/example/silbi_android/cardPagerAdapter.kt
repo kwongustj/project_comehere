@@ -31,7 +31,7 @@ class cardpagerAdapter(
 
     class CardViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
-        private val cardTextView1 : TextView = itemView.findViewById(R.id.text1)
+        private val cardTextView1 : TextView = itemView.findViewById(R.id.name)
         private val cardImageView : ImageView = itemView.findViewById(R.id.imageView1)
 
         fun bind(card: card) {

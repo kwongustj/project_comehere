@@ -87,7 +87,7 @@ class KeywordActivity : AppCompatActivity() {
 
         setRetrofit()
         callTodoList()
-
+        Log.d("불러오기 성공","Success")
         btn1.setOnClickListener {
             add()
         }
@@ -117,6 +117,7 @@ class KeywordActivity : AppCompatActivity() {
 
                             )
                             RateList.add(e1)
+                            Log.d("파이어베이스에서 가져온 값",RateList.toString())
                         }
 
 

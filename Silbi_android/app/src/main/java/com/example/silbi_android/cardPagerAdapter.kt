@@ -31,7 +31,7 @@ class cardpagerAdapter(
     class CardViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val cardname: TextView = itemView.findViewById(R.id.name)
-        private val cardImage: ImageView = itemView.findViewById(R.id.image)
+        private val cardImage: ImageView = itemView.findViewById(R.id.imageView1)
         private val cardPhone: TextView = itemView.findViewById(R.id.phone)
         private val cardfloor: TextView = itemView.findViewById(R.id.floor)
 
@@ -43,7 +43,11 @@ class cardpagerAdapter(
             cardPhone.text = card.phone
             cardfloor.text = card.floor
 
-            Glide.with(itemView).load(src).into(cardImage)
+            if (src == "_") {
+                Glide.with(itemView).load("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACgCAMAAACBpqFQAAAAMFBMVEXu7u6ZmZmurq7Z2dnDw8Pe3t7Ozs6+vr6enp7p6enJycmpqanj4+Ojo6O5ubmzs7NLxFgzAAAB2klEQVR4nO3X3XLCIBCGYZa/BEjM/d9tWYgprXbGHtS25n0OVCLj6De7YTUGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAvTHZc2WlYRBs+7w77pZS9dz/7xf4iK+NKxui8XPMIm8yXpb5w/VKYpRqDfW0p+qjPGla0TehhTW2Rh7BqNmWVko6wVokprHJTeC+q1UZZelheGtfDsm0Rh7AmXV2ktt6lX5JSH7L4X/wBz7RKXqYezZ6Ku4bV316GsKzUoopi90SNmbWorMTf+vbP5doNp8gXYWW5mCEsX3cne2zS4KRIK68ziK2Ftlo/98IKvYCOsNIstWs3c4Rl3NbuaucQNJWawd3K0vvZHMbTME17NrrJj07RiVY2X7S8eljZuXwNK84So6b1HtZB5ywZ2Xsf/mrSVn+ptuLNaVhzitqn6xiWjq7T1MdUNzrN9NAeNSzXW2rplZV1+jTxQ2XpLmvNPjmYPpfZ80ylu4cm+D572Xp8pr5t1qzO0YOjR8PyfrWLtJHiuo2whsVNGxZZe1pS9H5FWMPicxvWv86ptGtnOgq/L+oBkJ3+/9blmYYsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA4EneAHYKB+xqekqbAAAAAElFTkSuQmCC").into(cardImage)
+            } else {
+                Glide.with(itemView).load(src).into(cardImage)
+            }
         }
     }
 }

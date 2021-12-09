@@ -1,12 +1,15 @@
 package com.example.silbi_android
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
+import com.example.myapplication.rate
+import com.google.firebase.database.*
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import kotlinx.android.synthetic.main.activity_keyword.*
@@ -22,12 +25,21 @@ class RecommendActivity: AppCompatActivity(){
     lateinit var mRetrofit3: Retrofit
     lateinit var mRetrofitAPI3: RetrofitAPI3
     lateinit var mCallTodoList3: Call<JsonObject>
+
     private val viewPager: ViewPager2 by lazy {
         findViewById<ViewPager2>(R.id.viewpager)
     }
 
+    val database: FirebaseDatabase =
+        FirebaseDatabase.getInstance("https://silbi-7becf-default-rtdb.asia-southeast1.firebasedatabase.app/")
+    val myRef: DatabaseReference = database.getReference("점포")
+
     var array4 = arrayListOf<String>()
+    var array5 = arrayListOf<String>()
     private var cardslist = mutableListOf<card>()
+    val cardpagerAdapter = cardpagerAdapter( cardslist)
+
+//    val Adapter = cardpagerAdapter(cardslist, )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,19 +92,57 @@ class RecommendActivity: AppCompatActivity(){
             var mGson = Gson()
             val dataParsed0 = mGson.fromJson(result, DataModel3.TodoInfo0::class.java)
             array4.add(dataParsed0.todo0.task)
+            array5.add(dataParsed0.todo0.url)
             val dataParsed1 = mGson.fromJson(result, DataModel3.TodoInfo1::class.java)
             array4.add(dataParsed1.todo1.task)
+            array5.add(dataParsed1.todo1.url)
             val dataParsed2 = mGson.fromJson(result, DataModel3.TodoInfo2::class.java)
             array4.add(dataParsed2.todo2.task)
+            array5.add(dataParsed2.todo2.url)
             val dataParsed3 = mGson.fromJson(result, DataModel3.TodoInfo3::class.java)
             array4.add(dataParsed3.todo3.task)
+            array5.add(dataParsed3.todo3.url)
             val dataParsed4 = mGson.fromJson(result, DataModel3.TodoInfo4::class.java)
             array4.add(dataParsed4.todo4.task)
+            array5.add(dataParsed4.todo4.url)
 
             Log.d("받은 점포 명: ", array4.toString())
+            Log.d("url" , array5.toString())
+
+            myRef.addValueEventListener(object : ValueEventListener {
+
+                override fun onDataChange(snapshot: DataSnapshot) { // 리스트 만들 배열 가져오기
+                    cardslist.clear()
+                    val test = snapshot.child("정보")
+                    for (ds in test.children) {
+                        for (i in (0..4)) {
+                            if (ds.child("점포이름").getValue().toString() == array4[i]) {
+
+                                val e1 = card(
+                                    ds.child("점포이름").getValue().toString(),
+                                    array5[i],
+                                    ds.child("전화번호").getValue().toString(),
+                                    ds.child("층수").getValue().toString()
+                                )
+                                cardslist.add(e1)
+                            }
+                        viewPager.adapter = cardpagerAdapter
+
+                        }
+                    }
+                }
+
+
+                override fun onCancelled(error: DatabaseError) {
+                    Log.w(TAG, "Failed to read value.", error.toException())
+                }
+
+            })
 
         }
-    })
+    }
+            )
+
 
 
     private fun setRetrofit3() {
@@ -107,7 +157,7 @@ class RecommendActivity: AppCompatActivity(){
 
 
     private fun initViews() {
-        val cards = listOf(card("gi","gif"),card("gi","gifffff"),card("gi","gif"))
+        val cards = cardslist
         viewPager.adapter = cardpagerAdapter(
             cards
         )

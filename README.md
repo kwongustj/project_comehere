@@ -15,9 +15,18 @@
 - cardview, listview 사용 : 건물 내부 편의시설 추천내역은 cardview, listview를 사용하고 상점 이미지도 함께 보여준다.
 - 사용자가 건물을 선택한 후에 키워드를 선택할수 있도록 순서대로 화면이 표시되어야한다.
 ## Sample results
-|<H5>splash<H5> |<H5>건물찾기<H5>|
-|:-:|:-:|
-|![splash]<img src="https://user-images.githubusercontent.com/75787973/145671153-04c1e4d7-539e-4a1f-822b-ed5140832154.png"  width="250" height="550"/>|![건물찾기]<img src="https://user-images.githubusercontent.com/75787973/145671192-7efb965b-6ca9-4f5b-a2f5-40bd719b880b.png"  width="250" height="550"/>|
+|<H4>splash<H4> |<H4>건물찾기<H4>|<H4>건의사항<H4>|
+|:-:|:-:|:-:|
+|<img src="https://user-images.githubusercontent.com/75787973/145671153-04c1e4d7-539e-4a1f-822b-ed5140832154.png"  width="250" height="550"/>|<img src="https://user-images.githubusercontent.com/75787973/145671192-7efb965b-6ca9-4f5b-a2f5-40bd719b880b.png"  width="250" height="550"/>|<img src="https://user-images.githubusercontent.com/75787973/145671948-2716dfc4-9636-44ae-9cd8-4e9047f1c893.png"  width="260" height="550"/>|
+  
+|<H4>키워드 화면1<H4> |<H4>키워드 화면2<H4>|<H4>리뷰 점수별 추천<H4>|
+|:-:|:-:|:-:|
+|<img src="https://user-images.githubusercontent.com/75787973/145672043-4a8c0cb0-220f-445a-8da5-35b0c75cabb3.png" width="250" height="550"/>|<img src="https://user-images.githubusercontent.com/75787973/145672056-d48d3e3f-cbb7-4579-beb9-e004a6acbe75.png" width="250" height="550"/>|<img src="https://user-images.githubusercontent.com/75787973/145672076-705de942-7c20-4f8a-b4b5-84e969feac83.png" width="260" height="550"/>|
+  
+|<H4>찜한 곳 출력<H4> |
+|:-:|
+|<img src="https://user-images.githubusercontent.com/75787973/145672146-6cd5637e-7c26-4856-97e1-fc63809bbd42.png" width="250" height="550"/>|
+  
 
 
 
@@ -36,7 +45,7 @@
 3. beautifulsoup4
 5. openpyxl 
 6. math
-7.Flask 웹 프레임 워크
-8.Firebase 활용
+7. Flask 웹 프레임 워크
+8. Firebase 활용
 
 ## 정보 (라이선스)

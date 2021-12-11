@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.example.myapplication.rate
@@ -40,7 +41,8 @@ class KeywordActivity : AppCompatActivity() {
     var array2 = Array<String>(10, { "" })
 
     var RateList = arrayListOf<rate>()
-    var selectedKeywordList = arrayListOf<String>(" ", " ", " ", " ")
+    var selectedKeywordList1 = arrayListOf<String>()
+    var selectedKeywordList2 = arrayListOf<String>()
 
     private val btn1: AppCompatButton by lazy {
         findViewById<AppCompatButton>(R.id.btn1)
@@ -136,7 +138,12 @@ class KeywordActivity : AppCompatActivity() {
     }
 
     fun add() {
+        var selectedKeywordList = arrayListOf<String>()
+        selectedKeywordList.addAll(selectedKeywordList2)
+        selectedKeywordList.addAll(selectedKeywordList1)
+        Log.d("selectedKeywordList",selectedKeywordList.toString())
         var listString = selectedKeywordList.joinToString("  ")
+        Log.d("listString",listString)
         val intent = Intent(this, Keyword2Activity::class.java)
             intent.apply{
                 intent.putExtra("listString", listString)
@@ -145,6 +152,7 @@ class KeywordActivity : AppCompatActivity() {
         startActivity(intent)
     }
     fun onAddChip(view: KeywordActivity, i: String) {
+
         val chip = Chip(this)
         chip.text = i
         chip.setChipBackgroundColorResource(R.color.bg_chip_state_list)
@@ -163,29 +171,35 @@ class KeywordActivity : AppCompatActivity() {
         )
         chip.isCheckable = true
         var check = chip.isChecked
+
         chip.setOnClickListener {
             if (check == true) {
-                Toast.makeText(this@KeywordActivity, "빼", Toast.LENGTH_SHORT).show()
                 var str_data = i.replace("#", "")
                 str_data = str_data.replace("과 왔어요", "")
                 str_data = str_data.replace("와 왔어요", "")
                 check = false
-                selectedKeywordList.remove(str_data)
-                selectedKeywordList.add(" ")
+                selectedKeywordList1.remove(str_data)
+
 
             } else {
-                Toast.makeText(this@KeywordActivity, "추가됨", Toast.LENGTH_SHORT).show()
                 var str_data = i.replace("#", "")
                 str_data = str_data.replace("과 왔어요", "")
                 str_data = str_data.replace("와 왔어요", "")
                 check = true
-                if (selectedKeywordList.contains(" ") == true) {
-                    selectedKeywordList.remove(" ")
-                    selectedKeywordList.add(str_data)
+                if (selectedKeywordList1.size == 2) {
+                    selectedKeywordList1.add(str_data)
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Title")
+                    builder.setMessage("2개까지만 선택해주세요")
+                    builder.setNeutralButton("확인", null)
+                    builder.show()
                 } else {
-                    selectedKeywordList.add(str_data)
+                    selectedKeywordList1.add(str_data)
+
                 }
+
             }
+
         }
         chipgroup.addView(chip)
     }
@@ -210,24 +224,27 @@ class KeywordActivity : AppCompatActivity() {
             ),
             intArrayOf(Color.rgb(220, 220, 220), Color.rgb(255, 215, 157))
         )
+
         chip.setOnClickListener {
             if (check == true) {
-                Toast.makeText(this@KeywordActivity, "빼", Toast.LENGTH_SHORT).show()
                 var str_data = i.replace("#", "")
-                selectedKeywordList.remove(str_data)
-                selectedKeywordList.add(" ")
+                selectedKeywordList2.remove(str_data)
                 check = false
             } else {
-                Toast.makeText(this@KeywordActivity, "추가됨", Toast.LENGTH_SHORT).show()
-                if (selectedKeywordList.contains(" ")) {
-                    selectedKeywordList.remove(" ")
+                check = true
+                if (selectedKeywordList2.size == 2) {
                     var str_data = i.replace("#", "")
-                    selectedKeywordList.add(str_data)
+                    selectedKeywordList2.add(str_data)
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Title")
+                    builder.setMessage("2개까지만 선택해주세요")
+                    builder.setNeutralButton("확인", null)
+                    builder.show()
                 } else {
                     var str_data = i.replace("#", "")
-                    selectedKeywordList.add(str_data)
+                    selectedKeywordList2.add(str_data)
                 }
-                check = true
+
             }
         }
         chipgroup2.addView(chip)

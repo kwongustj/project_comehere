@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
 import com.google.android.material.chip.Chip
@@ -46,6 +47,7 @@ class Keyword2Activity: AppCompatActivity(){
                 val list = listString.split("  ")
                 for (i in list) {
                     array2.add(i)
+                    Log.d("${i}",i.toString())
                 }
                 setRetrofit2()
                 callTodoList2()
@@ -90,14 +92,18 @@ class Keyword2Activity: AppCompatActivity(){
                 Toast.makeText(this@Keyword2Activity, "빼", Toast.LENGTH_SHORT).show()
                 check = false
                 selectedKeywordList.remove(i)
-                selectedKeywordList.add(" ")
 
             } else {
                 Toast.makeText(this@Keyword2Activity, "추가됨", Toast.LENGTH_SHORT).show()
                 check = true
-                if (selectedKeywordList.contains(" ") == true) {
-                    selectedKeywordList.remove(" ")
+                if (selectedKeywordList.size == 8 ) {
                     selectedKeywordList.add(i)
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle("Title")
+                    builder.setMessage("5 ~ 8개까지만 선택해주세요")
+                    builder.setNeutralButton("확인", null)
+                    builder.show()
+
                 } else {
                     selectedKeywordList.add(i)
                 }
@@ -107,6 +113,13 @@ class Keyword2Activity: AppCompatActivity(){
     }
 
     private fun callTodoList2() {
+
+        val size = array2.size
+        if(size != 4) {
+            for( i in (1..4-size)) {
+                array2.add(" ")
+            }
+        }
         mCallTodoList2 = mRetrofitAPI2.getTodoList(
             array2[0],
             array2[1],
@@ -128,24 +141,22 @@ class Keyword2Activity: AppCompatActivity(){
             val result = response.body()
 
             var mGson = Gson()
-            val  dataParsed0= mGson.fromJson(result, DataModel2.TodoInfo10::class.java)
-            array3.add(dataParsed0.todo1.data)
+            val dataParsed0 = mGson.fromJson(result, DataModel2.TodoInfo10::class.java)
+            array3.add(dataParsed0.todo1!!.data)
             var list = dataParsed0.todo1.data.toString().split(", ")
 
             for (i in list) {
                 onAddChip(this@Keyword2Activity, i)
             }
-            val dataParsed1 = mGson.fromJson(result, DataModel2.TodoInfo11::class.java)
-            list = dataParsed1.todo2.data.toString().split(", ")
-            array3.add( dataParsed1.todo2.data)
 
+            if (dataParsed0.todo2 != null) {
+                list = dataParsed0.todo2!!.data.toString().split(", ")
+                array3.add(dataParsed0.todo2!!.data)
 
-            for (i in list) {
-                onAddChip(this@Keyword2Activity, i)
+                for (i in list) {
+                    onAddChip(this@Keyword2Activity, i)
+                }
             }
-
-
-
         }
     })
 

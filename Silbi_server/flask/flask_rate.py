@@ -96,6 +96,7 @@ class second_keyword(Resource):
         print(json.dumps(dictdict))
         print('')
         print(json.dumps(dictdict, ensure_ascii=False, indent=4))
+        print("dictdict: ",dictdict)
         return dictdict
 
 class keyword2(Resource):
@@ -163,13 +164,35 @@ class keyword2(Resource):
         tfidf_['Total'] = tfidf_.sum(axis=1)
         list_tfidf = tfidf_.sort_values(by=['Total'], axis=0, ascending=False).head(5)
         list____ = list(list_tfidf.index)
-        print(list____)
+        print("list____: ", list____)
 
-        df_list_result = []
-        for i in range(0, 5):
-            df_list_result.append(list____[i])
-        Todos = {"todo" + str(i): {"task": string} for i, string in enumerate(df_list_result)}
-        print(Todos)
+        df = pd.read_excel('result.xlsx')
+        df_dict = {}
+        df_list = df.values.tolist()
+
+        for i in list____:
+            df_dict[i] = "_"
+
+        for i in df_list:
+            for j in list____:
+                if i[1] == j:
+                    df_dict[j] = i[3]
+
+
+        print("df_list_: ",df_dict)
+
+        # df_list_result = []
+        # for i in range(0,len(df_dict)+1):
+        #     df_list_result.append(list____[i])
+        # print("df_list_result: ", df_list_result)
+
+        Todos = {}
+        i = 0
+        for key, value in df_dict.items():
+            Todos['todo'+str(i)]= {"task" : key ,"url": value}
+            i = i + 1
+
+        print("TODOS: ", Todos)
         return Todos
 
 
@@ -179,5 +202,6 @@ api.add_resource(hello, '/hello')
 api.add_resource(keyword2, '/keyword2')
 
 if __name__ == '__main__':
-    app.run(host="172.30.1.39", port=5000, debug=True)
+    app.run(host="172.30.1.56", port=5000, debug=True)
+
 

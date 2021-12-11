@@ -27,14 +27,17 @@
 - 방문 목적에 따른 키워드 선택   
 - 선택 키워드를 통한 건물 내부시설 추천   
 - 평점 기반 건물 내부시설 추천
+- 찜을 통해 마이페이지에 저장하여 볼 수 있는 기능
 ## 프로젝트 요구사항
 ![image](https://user-images.githubusercontent.com/75787973/145669165-17eb0e61-2a94-4148-b6f4-35f7ce80b619.png)
 
 ## 의존성
-1. python 3.7.3
+1. python 3.9
 2. selenium 90.0.4430.72
 3. beautifulsoup4
 5. openpyxl 
 6. math
+7.Flask 웹 프레임 워크
+8.Firebase 활용
 
 ## 정보 (라이선스)

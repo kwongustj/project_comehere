@@ -17,8 +17,7 @@
 ## Sample results
 |<H5>splash<H5> |<H5>건물찾기<H5>|
 |:-:|:-:|
-|![splash](https://user-images.githubusercontent.com/75787973/145671153-04c1e4d7-539e-4a1f-822b-ed5140832154.png)|![건물찾기](https://user-images.githubusercontent.com/75787973/145671192-7efb965b-6ca9-4f5b-a2f5-40bd719b880b.png)|
-
+|![splash]<img src="https://user-images.githubusercontent.com/75787973/145671153-04c1e4d7-539e-4a1f-822b-ed5140832154.png"  width="250" height="550"/>|![건물찾기]<img src="https://user-images.githubusercontent.com/75787973/145671192-7efb965b-6ca9-4f5b-a2f5-40bd719b880b.png"  width="250" height="550"/>|
 
 
 

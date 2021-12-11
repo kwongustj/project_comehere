@@ -1,13 +1,22 @@
 package com.example.silbi_android
 
 import android.text.method.ScrollingMovementMethod
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.security.AccessController.getContext
 
 class cardpagerAdapter(
@@ -34,11 +43,12 @@ class cardpagerAdapter(
         private val cardImage: ImageView = itemView.findViewById(R.id.imageView1)
         private val cardPhone: TextView = itemView.findViewById(R.id.phone)
         private val cardfloor: TextView = itemView.findViewById(R.id.floor)
+        private val button: Button = itemView.findViewById<Button>(R.id.btn1)
 
         fun bind(card: card) {
 
             val src = card.image
-
+            val name = card.name
             cardname.text = card.name
             cardPhone.text = card.phone
             cardfloor.text = card.floor
@@ -48,6 +58,42 @@ class cardpagerAdapter(
             } else {
                 Glide.with(itemView).load(src).into(cardImage)
             }
+
+            button.setOnClickListener {
+
+
+                var email = ""
+                var id = ""
+                val user = Firebase.auth.currentUser
+                if (user != null) {
+                    Log.d("user",user.toString())
+                    email = user!!.email.toString()
+                    val splitArray = email.split("@")
+                    id = splitArray[0]
+                } else {
+                    Log.d("user","정보 가져올 수 없음")
+                }
+
+                val database: FirebaseDatabase =
+                    FirebaseDatabase.getInstance("https://silbi-7becf-default-rtdb.asia-southeast1.firebasedatabase.app/")
+                val myRef1: DatabaseReference = database.getReference("$id/점포/$name/name")
+                myRef1.setValue(card.name)
+                val myRef2: DatabaseReference = database.getReference("$id/점포/$name/image")
+                myRef2.setValue(src)
+                val myRef3: DatabaseReference = database.getReference("$id/점포/$name/phone")
+                myRef3.setValue(card.phone)
+                val myRef4: DatabaseReference = database.getReference("$id/점포/$name/floor")
+                myRef4.setValue(card.floor)
+
+                val builder = AlertDialog.Builder(itemView.context)
+                builder.setTitle("완료")
+                builder.setMessage("마이페이지에 저장되었습니다!")
+                builder.setNeutralButton("확인", null)
+                builder.show()
+            }
+
         }
+
+
     }
 }

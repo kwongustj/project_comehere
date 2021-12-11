@@ -12,6 +12,8 @@ import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
+    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
+
     private val Button1: AppCompatButton by lazy {
         findViewById<AppCompatButton>(R.id.gobtn)
     }
@@ -33,11 +35,6 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
-
-
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -56,6 +53,14 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, AskActivity::class.java))
         }
 
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if(auth.currentUser == null) {
+            startActivity(Intent(this, LoginActivity::class.java))
+        }
     }
 
 }

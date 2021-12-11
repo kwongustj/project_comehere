@@ -44,6 +44,7 @@
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
         <activity
             android:name=".AskActivity"
+            android:noHistory="true"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"/>
     </application>
 

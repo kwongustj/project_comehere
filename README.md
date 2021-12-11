@@ -20,7 +20,7 @@
   
 |<H4>키워드 화면1<H4>|<H4>키워드 화면2<H4>|<H4>리뷰 점수별 추천<H4>|
 |:-:|:-:|:-:|
-|<img src="https://user-images.githubusercontent.com/75787973/145672043-4a8c0cb0-220f-445a-8da5-35b0c75cabb3.png" width="250" height="550"/>|<img src="https://user-images.githubusercontent.com/75787973/145672056-d48d3e3f-cbb7-4579-beb9-e004a6acbe75.png" width="250" height="550"/>|<img src="https://user-images.githubusercontent.com/75787973/145672076-705de942-7c20-4f8a-b4b5-84e969feac83.png" width="260" height="550"/>|
+|<img src="https://user-images.githubusercontent.com/75787973/145677991-c813aa4b-6b66-4597-ad32-eaa2a8d6cdc4.png" width="250" height="550"/>|<img src="https://user-images.githubusercontent.com/75787973/145672056-d48d3e3f-cbb7-4579-beb9-e004a6acbe75.png" width="250" height="550"/>|<img src="https://user-images.githubusercontent.com/75787973/145672076-705de942-7c20-4f8a-b4b5-84e969feac83.png" width="260" height="550"/>|
   
   
 |<H4>찜한 곳 출력<H4>|<H4>최종 출력<H4>|

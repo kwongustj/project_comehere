@@ -1,5 +1,6 @@
 # 이리와유!  
-<img width="448" alt="스크린샷 2021-12-03 오전 12 03 48" src="https://user-images.githubusercontent.com/62468086/144447607-cf8b6cd1-e32c-41db-819b-bf898e07438f.png">
+![image](https://user-images.githubusercontent.com/75787973/145670926-3e85a323-bdbb-4f05-be48-17c00d5ff813.png)
+
 
 
 - 2021 - 2 산학프로젝트 과목 실비팀  
@@ -12,12 +13,17 @@
 
 ## 인터페이스
 - cardview, listview 사용 : 건물 내부 편의시설 추천내역은 cardview, listview를 사용하고 상점 이미지도 함께 보여준다.
-- 사용자가 지역,건물을 선택한 후에 키워드를 선택할수 있도록 순서대로 화면이 표시되어야한다.
+- 사용자가 건물을 선택한 후에 키워드를 선택할수 있도록 순서대로 화면이 표시되어야한다.
 ## Sample results
+|<H5>splash<H5> |<H5>건물찾기<H5>|
+|:-:|:-:|
+|![splash](https://user-images.githubusercontent.com/75787973/145671153-04c1e4d7-539e-4a1f-822b-ed5140832154.png)|![건물찾기](https://user-images.githubusercontent.com/75787973/145671192-7efb965b-6ca9-4f5b-a2f5-40bd719b880b.png)|
+
+
 
 
 ## 핵심기능
-- 방문 할 지역과 건물 선택
+- 방문 할 건물 선택
 - 방문 목적에 따른 키워드 선택   
 - 선택 키워드를 통한 건물 내부시설 추천   
 - 평점 기반 건물 내부시설 추천

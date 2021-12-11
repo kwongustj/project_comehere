@@ -135,21 +135,25 @@ class KeywordActivity : AppCompatActivity() {
             btn1.visibility = View.VISIBLE
             purpose.visibility = View.VISIBLE
             if(selectedKeywordList1.size == 2) {
-                for (i in list2) {
+                chipgroup2.removeAllViews()
+                for (i in list2){
                     onAddChip2(this, i)
                 }
             } else{
                 if(selectedKeywordList1[0] == "아이") {
+                    chipgroup2.removeAllViews()
                     for (i in list3) {
                         onAddChip2(this, i)
                     }
                 }
                 else if (selectedKeywordList1[0] == "가족") {
+                    chipgroup2.removeAllViews()
                      for (i in list2) {
                     onAddChip2(this, i)
                 }
                 }
                 else {
+                    chipgroup2.removeAllViews()
                     for (i in list4) {
                         onAddChip2(this, i)
                     }

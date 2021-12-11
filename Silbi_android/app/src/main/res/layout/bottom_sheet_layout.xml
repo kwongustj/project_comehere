@@ -10,7 +10,7 @@
     <TextView
         android:id="@+id/bottomsheetTitle"
         android:layout_width="0dp"
-        android:layout_height="100dp"
+        android:layout_height="80dp"
         android:fontFamily="@font/nanoom"
         android:gravity="center"
         android:text="네이버 평점 순으로 보기!!"

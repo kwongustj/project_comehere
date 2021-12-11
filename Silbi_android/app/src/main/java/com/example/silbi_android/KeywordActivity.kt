@@ -5,7 +5,9 @@ import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -48,6 +50,15 @@ class KeywordActivity : AppCompatActivity() {
         findViewById<AppCompatButton>(R.id.btn1)
     }
 
+    private val btn2: AppCompatButton by lazy {
+        findViewById<AppCompatButton>(R.id.btn2)
+    }
+
+    private val purpose: TextView by lazy {
+        findViewById<TextView>(R.id.purpose)
+    }
+
+
     lateinit var mRetrofit: Retrofit
     lateinit var mRetrofitAPI: RetrofitAPI
     lateinit var mCallTodoList: Call<JsonObject>
@@ -72,6 +83,29 @@ class KeywordActivity : AppCompatActivity() {
             "#여가를 즐기고 싶어요",
             "#화장품&악세서리 구경하고 싶어요"
         )
+        var list3: List<String> = listOf( //아이
+            "#배고파요",
+            "#옷사고싶어요",
+            "#가구&가전제품 보러왔어요",
+            "#카페에서 쉬고싶어요",
+            "#편의시설이 궁금해요",
+            "#조용한 곳에서 힐링하고 싶어요",
+            "#분위기 있는 곳에 가고싶어요",
+            "#가벼운 간식을 사고싶어요",
+            "#선물을 사러 왔어요",
+            "#여가를 즐기고 싶어요"
+        )
+        var list4: List<String> = listOf( //연인 or 친구
+            "#배고파요",
+            "#옷사고싶어요",
+            "#카페에서 쉬고싶어요",
+            "#편의시설이 궁금해요",
+            "#조용한 곳에서 힐링하고 싶어요",
+            "#분위기 있는 곳에 가고싶어요",
+            "#가벼운 간식을 사고싶어요",
+            "#선물을 사러 왔어요",
+        )
+
 
 
         val database: FirebaseDatabase =
@@ -94,13 +128,33 @@ class KeywordActivity : AppCompatActivity() {
             add()
         }
 
-
         for (i in list) {
             onAddChip(this, i)
         }
-
-        for (i in list2) {
-            onAddChip2(this, i)
+        btn2.setOnClickListener {
+            btn1.visibility = View.VISIBLE
+            purpose.visibility = View.VISIBLE
+            if(selectedKeywordList1.size == 2) {
+                for (i in list2) {
+                    onAddChip2(this, i)
+                }
+            } else{
+                if(selectedKeywordList1[0] == "아이") {
+                    for (i in list3) {
+                        onAddChip2(this, i)
+                    }
+                }
+                else if (selectedKeywordList1[0] == "가족") {
+                     for (i in list2) {
+                    onAddChip2(this, i)
+                }
+                }
+                else {
+                    for (i in list4) {
+                        onAddChip2(this, i)
+                    }
+                }
+            }
         }
         myRef.addValueEventListener(object : ValueEventListener {
 

@@ -3,5 +3,5 @@
     <string name="친구들">#친구들</string>
     <string name="가족">#가족</string>
     <string name="여긴어떠세요">여긴 어떠세요?!</string>
-    <string name="baseUrl">http://172.30.1.39:5000/ </string>
+    <string name="baseUrl">http://172.30.1.56:5000/ </string>
 </resources>

@@ -100,27 +100,41 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/people" />
         </HorizontalScrollView>
-
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/button"
+            android:fontFamily="@font/nanoom"
+            android:text="다음"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/scrollView1" />
         <TextView
             android:id="@+id/purpose"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/nanoom"
             android:paddingLeft="40dp"
             android:paddingTop="10dp"
             android:paddingBottom="20dp"
             android:text="2. 목적 (2개 이하 선택)"
+            android:visibility="invisible"
             android:textColor="@color/black"
             android:textSize="30sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/scrollView1" />
+            app:layout_constraintTop_toBottomOf="@id/btn2" />
 
         <ScrollView
             android:id="@+id/scrollView"
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="210dp"
             android:scrollbars="none"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/purpose">
@@ -142,6 +156,7 @@
             android:backgroundTint="@color/button"
             android:fontFamily="@font/nanoom"
             android:text="다음"
+            android:visibility="invisible"
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold"

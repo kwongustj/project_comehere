@@ -12,6 +12,9 @@
 안드로이드 스튜디오에서 프로젝트를 Open하고 실행하기  
 파이썬에서 엑셀파일은 모두 한 디렉터리에 넣어준 후 실행, flask_rate.py의 마지막 host부분엔 자신의 서버 주소를 적고 실행
 
+## 시연 동영상
+https://www.youtube.com/watch?v=avLdZs4jDzk
+
 
 ## Sample results
 |<H4>splash<H4> |<H4>건물찾기<H4>|<H4>건의사항<H4>|
